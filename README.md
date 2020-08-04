@@ -1,5 +1,7 @@
 ### Hi there 👋
 
+[![Rishab Pal StackOverflow](https://github-readme-stackoverflow.vercel.app/?userID=11952444)](https://stackoverflow.com/users/11952444/rishab-p)
+
 <!--
 **iamrishab/iamrishab** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
