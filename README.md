@@ -32,6 +32,7 @@
 <p align="center">
   <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-ar21.svg"></a></code>
   <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://github.com/isocpp/logos/blob/master/cpp_logo.svg"></a></code>
+  <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://github.com/odb/official-bash-logo/blob/master/assets/Logos/Icons/SVG/128x128.svg"></a></code>
   <code><a href="https://www.tensorflow.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-ar21.svg"></a></code>
   <code><a href="https://pytorch.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/pytorch/pytorch-ar21.svg"></a></code>
 </p>
