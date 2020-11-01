@@ -46,11 +46,9 @@
   <code><a href="https://aws.amazon.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-ar21.svg"></a></code>
 </p>
 
-[![Rishab Pal StackOverflow](https://github-readme-stackoverflow.vercel.app/?userID=11952444)](https://stackoverflow.com/users/11952444/rishab-p)
-
 ## &#x1f4c8; GitHub Stats
 
-<a href="https://github.com/dubesar/dubesar">
+<a href="https://github.com/iamrishab/iamrishab">
   <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iamrishab&hide=html,jupyter%20notebook" />
 </a>
 <a href="https://github.com/iamrishab/iamrishab">
