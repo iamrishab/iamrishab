@@ -10,6 +10,7 @@
   </a>
 </p>
 
+
 <h3 align="center">
   <code>
     About Me
@@ -22,6 +23,7 @@
 <p align="center">
   💬 Ask me about <b>anything<b>
 </p>
+
 
 <h3 align="center">
   <code>
@@ -46,16 +48,40 @@
   <code><a href="https://aws.amazon.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-ar21.svg"></a></code>
 </p>
 
-## &#x1f4c8; GitHub Stats
 
-<a href="https://github.com/iamrishab/iamrishab">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iamrishab&hide=html,jupyter%20notebook" />
-</a>
-<a href="https://github.com/iamrishab/iamrishab">
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=iamrishab&show_icons=true&line_height=27&count_private=true" alt="Rishab's GitHub Stats" />
-</a>
+<h3 align="center">
+  <code>
+    StackOverflow Stats
+  </code>
+</h3>
 
-## 📫 How to reach me
-You can reach me at the email on my GitHub profile. Follow me on my social media!
+<p align="center">
+  <a href="https://github.com/iamrishab/iamrishab">
+    <img align="center" src="https://github-readme-stackoverflow.vercel.app/?userID=11952444" />
+  </a>
+</p>
 
-[<img src="https://raw.githubusercontent.com/Raymo111/Raymo111/master/socials/linkedin.png" height="40em" align="center" alt="Follow Rishab on LinkedIn" title="Follow Sarvesh on Linkedin"/>](https://www.linkedin.com/in/rishabpal/)
+
+<h3 align="center">
+  <code>
+    GitHub Stats
+  </code>
+</h3>
+<p align="center">
+  <a href="https://github.com/iamrishab/iamrishab">
+    <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iamrishab&hide=html,jupyter%20notebook" />
+  </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/iamrishab/iamrishab">
+    <img align="center" src="https://github-readme-stats.vercel.app/api?username=iamrishab&show_icons=true&line_height=27&count_private=true" alt="Rishab's GitHub Stats" />
+  </a>
+</p>
+
+
+<h3 align="center">
+  <code>
+    How to reach me
+  </code>
+</h3>
+
+<p align="center">
+You can reach me at the email on my GitHub profile.
