@@ -48,4 +48,16 @@
 
 [![Rishab Pal StackOverflow](https://github-readme-stackoverflow.vercel.app/?userID=11952444)](https://stackoverflow.com/users/11952444/rishab-p)
 
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=iamrishab&show_icons=true)
+## &#x1f4c8; GitHub Stats
+
+<a href="https://github.com/dubesar/dubesar">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iamrishab&hide=html,jupyter%20notebook" />
+</a>
+<a href="https://github.com/iamrishab/iamrishab">
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=iamrishab&show_icons=true&line_height=27&count_private=true" alt="Rishab's GitHub Stats" />
+</a>
+
+## 📫 How to reach me
+You can reach me at the email on my GitHub profile. Follow me on my social media!
+
+[<img src="https://raw.githubusercontent.com/Raymo111/Raymo111/master/socials/linkedin.png" height="40em" align="center" alt="Follow Rishab on LinkedIn" title="Follow Sarvesh on Linkedin"/>](https://www.linkedin.com/in/rishabpal/)
