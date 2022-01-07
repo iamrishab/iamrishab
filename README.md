@@ -84,4 +84,4 @@
 </h3>
 
 <p align="center">
-You can reach me at the email on my GitHub profile.
+You can reach me at me.rishabpal@gmail.com 
