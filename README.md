@@ -84,4 +84,4 @@
 </h3>
 
 <p align="center">
-You can reach me at me.rishabpal@gmail.com 
+me.rishabpal@gmail.com 
