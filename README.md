@@ -63,8 +63,8 @@
 </h3>
 
 <p align="center">
-  <a href="https://github.com/iamrishab/iamrishab">
-    <img align="center" src="https://github-readme-stackoverflow.vercel.app/?userID=11952444" />
+  <a href="https://stackoverflow.com/users/9939542/rishab-p">
+    <img align="center" src="https://github-readme-stackoverflow.vercel.app/?userID=9939542" />
   </a>
 </p>
 
