@@ -56,11 +56,11 @@
 </p>
 
 
-<h3 align="center">
+<!-- <h3 align="center">
   <code>
     StackOverflow Stats
   </code>
-</h3>
+</h3> -->
 
 <!-- <p align="center">
   <a href="https://stackoverflow.com/users/9939542/rishab-p">
