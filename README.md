@@ -12,9 +12,7 @@
 
 
 <h3 align="center">
-  <code>
-    About Me
-  </code>
+  <code>About Me</code>
 </h3>
 
 <p align="center">
@@ -26,9 +24,7 @@
 
 
 <h3 align="center">
-  <code>
-    Tech Stack
-  </code>
+  <code>Tech Stack</code>
 </h3>
 
 <p align="center">
@@ -57,9 +53,7 @@
 
 
 <h3 align="center">
-  <code>
-    StackOverflow Stats
-  </code>
+  <code>StackOverflow Stats</code>
 </h3>
 
 <p align="center">
@@ -70,9 +64,7 @@
 
 
 <h3 align="center">
-  <code>
-    GitHub Stats
-  </code>
+  <code>GitHub Stats</code>
 </h3>
 <p align="center">
   <a href="https://github.com/iamrishab/iamrishab">
@@ -85,9 +77,7 @@
 
 
 <h3 align="center">
-  <code>
-    How to reach me
-  </code>
+  <code>How to reach me</code>
 </h3>
 
 <p align="center">
