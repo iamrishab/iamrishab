@@ -62,20 +62,6 @@
   </a>
 </p>
 
-
-<h3 align="center">
-  <code>GitHub Stats</code>
-</h3>
-<p align="center">
-  <a href="https://github.com/iamrishab/iamrishab">
-    <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iamrishab&hide=html,jupyter%20notebook" />
-  </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/iamrishab/iamrishab">
-    <img align="center" src="https://github-readme-stats.vercel.app/api?username=iamrishab&show_icons=true&line_height=27&count_private=true" alt="Rishab's GitHub Stats" />
-  </a>
-</p>
-
-
 <h3 align="center">
   <code>How to reach me</code>
 </h3>
