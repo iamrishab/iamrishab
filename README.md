@@ -107,9 +107,6 @@
   <a href="https://linkedin.com/in/rishabpal" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-rishabpal-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
-  <a href="https://twitter.com/iamrishabpal" target="_blank">
-    <img src="https://img.shields.io/badge/Twitter-@iamrishabpal-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter">
-  </a>
 </p>
 
 <h3 align="center">
@@ -117,24 +114,11 @@
 </h3>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=iamrishab&show_icons=true&theme=dark&hide_border=true&count_private=true" alt="GitHub Stats">
-</p>
-
-<p align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=iamrishab&theme=dark&hide_border=true" alt="GitHub Streak">
 </p>
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=iamrishab&layout=compact&theme=dark&hide_border=true&exclude_repo=iamrishab" alt="Top Languages">
-</p>
-
-<h3 align="center">
-  <code>Contributions & Open Source</code>
-</h3>
-
-<p align="center">
-  🔥 <b>500+</b> contributions to AI/ML open source projects<br>
-  📚 <b>Mentor</b> for AI startups and researchers
 </p>
 
 <p align="center">
