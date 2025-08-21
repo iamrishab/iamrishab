@@ -19,10 +19,10 @@
   🔭 I'm currently working on <b>Multi-Agent AI Systems</b>, <b>LLM Orchestration</b>, and <b>Agentic Frameworks</b>.
 </p>
 <p align="center">
-  🤖 Building with <b>Claude 4</b>, <b>GPT-4o</b>, <b>Gemini 2.5 Pro</b>, and <b>Llama 4</b> for next-gen AI applications.
+  🤖 Building with <b>Claude</b>, <b>GPT</b>, <b>Gemini</b>, <b>Llama</b> and other <b>Open Source</b> LLMs for next-gen AI applications.
 </p>
 <p align="center">
-  ⚡ Specializing in <b>LangGraph</b>, <b>CrewAI</b>, <b>AutoGen</b>, and <b>multimodal AI</b> development.
+  ⚡ Specializing in <b>LangGraph</b>, <b>CrewAI</b>, <b>AutoGen</b>, and <b>Multimodal AI</b> development.
 </p>
 <p align="center">
   💬 Ask me about <b>AI Agent Architectures</b>, <b>LLM Fine-tuning</b>, and <b>Enterprise AI Solutions</b>
@@ -85,17 +85,6 @@
 
 </div>
 
-
-<h3 align="center">
-  <code>StackOverflow Stats</code>
-</h3>
-
-<p align="center">
-  <a href="https://stackoverflow.com/users/9939542/rishab-p">
-    <img align="center" src="https://github-readme-stackoverflow.vercel.app/?userID=9939542" />
-  </a>
-</p>
-
 <h3 align="center">
   <code>How to reach me</code>
 </h3>
@@ -106,6 +95,17 @@
   </a>
   <a href="https://linkedin.com/in/rishabpal" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-rishabpal-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+</p>
+
+
+<h3 align="center">
+  <code>StackOverflow Stats</code>
+</h3>
+
+<p align="center">
+  <a href="https://stackoverflow.com/users/9939542/rishab-p">
+    <img align="center" src="https://github-readme-stackoverflow.vercel.app/?userID=9939542" />
   </a>
 </p>
 
