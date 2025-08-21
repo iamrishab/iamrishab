@@ -12,7 +12,7 @@
 
 
 <h2 align="center">
-  <code>🚀 About Me</code>
+  🚀 About Me
 </h2>
 
 <p align="center">
@@ -30,12 +30,11 @@
 
 
 <h2 align="center">
-  <code>🧰 Tech Stack</code>
+  🧰 Tech Stack
 </h2>
 
-<div align="center">
 
-## 🤖 AI \u0026 LLM Frameworks
+## 🤖 AI & LLM Frameworks
 [![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://www.langchain.com/)
 [![CrewAI](https://img.shields.io/badge/CrewAI-FF6B35?style=for-the-badge&logo=openai&logoColor=white)](https://www.crewai.com/)
 [![AutoGen](https://img.shields.io/badge/AutoGen-00BCF2?style=for-the-badge&logo=microsoft&logoColor=white)](https://microsoft.github.io/autogen/)
@@ -45,7 +44,7 @@
 [![LangGraph](https://img.shields.io/badge/LangGraph-FF6B6B?style=for-the-badge&logo=graphql&logoColor=white)](https://langchain-ai.github.io/langgraph/)
 [![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.ai/)
 
-## ⚡ ML \u0026 Deep Learning
+## ⚡ ML & Deep Learning
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
@@ -55,7 +54,7 @@
 [![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white)](https://opencv.org/)
 
-## 🔧 Tools \u0026 Infrastructure
+## 🔧 Tools & Infrastructure
 [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
@@ -65,7 +64,7 @@
 [![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)](https://grafana.com/)
 [![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)](https://mlflow.org/)
 
-## ☁️ Cloud \u0026 Databases
+## ☁️ Cloud & Databases
 [![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
 [![Azure](https://img.shields.io/badge/Microsoft%20Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/)
@@ -75,7 +74,7 @@
 [![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)](https://www.elastic.co/)
 [![Neo4j](https://img.shields.io/badge/Neo4j-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)](https://neo4j.com/)
 
-## 💻 Development \u0026 Code Quality
+## 💻 Development & Code Quality
 [![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/)
 [![PyCharm](https://img.shields.io/badge/PyCharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green)](https://www.jetbrains.com/pycharm/)
 [![Cursor](https://img.shields.io/badge/Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.sh/)
@@ -83,10 +82,8 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Gradio](https://img.shields.io/badge/Gradio-FFA500?style=for-the-badge&logo=gradio&logoColor=white)](https://gradio.app/)
 
-</div>
-
 <h2 align="center">
-  <code>📫 How to reach me</code>
+  📫 How to reach me
 </h2>
 
 <p align="center">
@@ -100,7 +97,7 @@
 
 
 <h2 align="center">
-  <code>🧠 StackOverflow Stats</code>
+  🧠 StackOverflow Stats
 </h2>
 
 <p align="center">
@@ -110,7 +107,7 @@
 </p>
 
 <h2 align="center">
-  <code>📊 GitHub Stats</code>
+  📊 GitHub Stats
 </h2>
 
 <p align="center">
@@ -126,7 +123,7 @@
 </p>
 
 <h2 align="center">
-  <code>🏅 Latest Certifications</code>
+  🏅 Latest Certifications
 </h2>
 
 <p align="center">
@@ -136,7 +133,6 @@
   🏆 <b>NVIDIA Deep Learning Institute</b> - GPU-accelerated computing
 </p>
 
-<br>
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=iamrishab&label=Profile%20views&color=0e75b6&style=flat" alt="Profile Views">
