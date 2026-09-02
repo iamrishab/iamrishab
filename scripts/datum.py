@@ -192,7 +192,7 @@ def build_hero(palette: Theme) -> str:
     body = (
         f"{_path(line1, palette['INK'], 'hook-1')}"
         f"{_path(line2, palette['INK'], 'hook-2')}"
-        f"{_path(line3, palette['INK'], 'hook')}"
+        f"{_path(line3, palette['FILAMENT'], 'hook')}"
         f"{sigil_group(palette, sigil_x, 168, 0.72, pulse=False, element_id='datum')}"
         f"{horizon}"
         f"{_path(t_mark, palette['MUTED'], 'axis-t')}"
@@ -227,7 +227,7 @@ def build_act(palette: Theme) -> str:
     body = (
         f"{_path(see, palette['MUTED'], 'see')}"
         f"{_path(choose, palette['MUTED'], 'choose')}"
-        f"{_path(act, palette['INK'], 'act')}"
+        f"{_path(act, palette['FILAMENT'], 'act')}"
         f"{motion}"
     )
     return _svg_doc(880, 88, body)
@@ -247,7 +247,7 @@ def build_work(palette: Theme) -> str:
         metric_d, _ = outline_text(mono, metric, 38, 110, baseline)
         domain_d, _ = outline_text(mono, domain, 20, 620, baseline)
         parts.append(_path(num_d, palette["MUTED"], f"idx-{index}"))
-        parts.append(_path(metric_d, palette["INK"], f"metric-{index}"))
+        parts.append(_path(metric_d, palette["FILAMENT"], f"metric-{index}"))
         parts.append(_path(domain_d, palette["MUTED"], f"domain-{index}"))
         if index < 3:
             y = baseline + 28

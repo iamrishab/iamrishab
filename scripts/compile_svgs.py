@@ -10,8 +10,11 @@ import yaml
 # Allow `uv run scripts/compile_svgs.py` without installing a package.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from collections.abc import Callable
+
 from scripts.datum import (
     ROOT,
+    Theme,
     build_act,
     build_hero,
     build_now,
@@ -20,6 +23,16 @@ from scripts.datum import (
     build_work,
     write_src_templates,
     write_themed,
+)
+from scripts.page import (
+    GLYPHS,
+    build_chips,
+    build_emoji,
+    build_frame,
+    build_reach,
+    build_record,
+    build_systems,
+    build_take,
 )
 
 
@@ -32,6 +45,23 @@ def compile_all(now_line: str) -> None:
     write_themed("work", build_work)
     write_themed("stack", build_stack)
     write_themed("now", lambda palette: build_now(palette, now_line))
+    write_themed("frame", build_frame)
+    write_themed("systems", build_systems)
+    write_themed("take", build_take)
+    write_themed("chips", build_chips)
+    write_themed("record", build_record)
+    write_themed("reach", build_reach)
+    for kind in GLYPHS:
+        write_themed(f"emoji-{kind}", _emoji(kind))
+
+
+def _emoji(kind: str) -> Callable[[Theme], str]:
+    """Bind one glyph name so the loop does not close over a changing variable."""
+
+    def build(palette: Theme) -> str:
+        return build_emoji(palette, kind)
+
+    return build
 
 
 def main() -> None:

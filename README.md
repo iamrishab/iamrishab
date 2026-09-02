@@ -4,9 +4,13 @@
   <img src="assets/dist/hero-light.svg" width="880" alt="My loss function in life is feeling alive.">
 </picture>
 
-My loss function in life is feeling alive.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/frame-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/frame-light.svg">
+  <img src="assets/dist/frame-light.svg" width="880" alt="I run Immovable Tech. Before that I spent eight years putting models into products that already had users — search, KYC, roofs measured from the air, assistants that had to answer in two languages. I care about the part after the demo: latency, evals, the bill, whether it still works on a Monday.">
+</picture>
 
-I run [Immovable Tech](https://immovabletech.com). Before that I spent eight years putting models into products that already had users — search, KYC, roofs measured from the air, assistants that had to answer in two languages. I care about the part after the demo: latency, evals, the bill, whether it still works on a Monday.
+[Immovable Tech](https://immovabletech.com)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/act-dark.svg">
@@ -14,20 +18,19 @@ I run [Immovable Tech](https://immovabletech.com). Before that I spent eight yea
   <img src="assets/dist/act-light.svg" width="880" alt="See, choose, act — AI that acts, not just answers.">
 </picture>
 
-## Work
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/work-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/work-light.svg">
   <img src="assets/dist/work-light.svg" width="880" alt="+50% CTR on catalog search. Aerial line detection 28% to 59%. CES 2019 live demo.">
 </picture>
 
-1. **Immovable Tech** — Agents that run the loop, not the slide. LangGraph + LangSmith, graph + vector RAG, models tuned on the domain, evals you can read later.
-2. **Catalog search at 5,000 QPS** — Semantic matching and learn-to-rank. Click-through +50%, revenue +10%, Milvus underneath.
-3. **Roofs from the air** — Line detection 28% → 59%. Facets at 86% mIOU. Triton + INT8, 25% faster, 30% less VRAM.
-4. **A national-scale assistant** — English and Hinglish, thousands of chats a day. The KYC face stack next to it cut manual review about 25%.
-5. **OCR that beat the API I was paying for** — +12% on ICDAR 2013 versus Google Vision, at a tenth the infra. BERT on the correction pass.
-6. **CES 2019** — Gesture, face, collision tracking in a live golf-cart demo. The [public repo](https://github.com/iamrishab/artificial-intelligence-conductor) is a dummy sketch, not the show build.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/systems-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/systems-light.svg">
+  <img src="assets/dist/systems-light.svg" width="880" alt="Immovable Tech. Catalog search at 5,000 QPS. Roofs from the air. A national-scale assistant. OCR that beat the API I was paying for. CES 2019.">
+</picture>
+
+CES 2019 public repo: [dummy sketch](https://github.com/iamrishab/artificial-intelligence-conductor)
 
 <details>
 <summary>How the later agent work is shaped</summary>
@@ -36,11 +39,13 @@ Questions become DAGs. Known SQL hits a template; the model only writes when not
 
 </details>
 
-## How I take work
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/take-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/take-light.svg">
+  <img src="assets/dist/take-light.svg" width="880" alt="I take 0→1 AI products and the messy ones that already exist. Discovery through deploy. If you need a deck, I’m the wrong person. If you need a system that is still correct in six months, email me.">
+</picture>
 
-I take 0→1 AI products and the messy ones that already exist. Discovery through deploy. If you need a deck, I’m the wrong person. If you need a system that is still correct in six months, [email me](mailto:rishabpal.work@gmail.com).
-
-## Stack
+[email me](mailto:rishabpal.work@gmail.com)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/stack-dark.svg">
@@ -48,7 +53,11 @@ I take 0→1 AI products and the messy ones that already exist. Discovery throug
   <img src="assets/dist/stack-light.svg" width="880" alt="Agents, models, data, serve, eval.">
 </picture>
 
-LangGraph · LangSmith · PyTorch · RAG (Neo4j / Milvus / Pinecone) · FastAPI · Triton · AWS / GCP / Azure
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/chips-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/chips-light.svg">
+  <img src="assets/dist/chips-light.svg" width="880" alt="LangGraph, LangSmith, PyTorch, RAG, FastAPI, Triton, AWS, GCP, Azure.">
+</picture>
 
 <details>
 <summary>The rest of the bench</summary>
@@ -67,8 +76,18 @@ LangGraph · LangSmith · PyTorch · RAG (Neo4j / Milvus / Pinecone) · FastAPI 
   <img src="assets/dist/now-light.svg" width="880" alt="Now: shipping multi-agent systems with evals and a paper trail">
 </picture>
 
-## On the record
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/record-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/record-light.svg">
+  <img src="assets/dist/record-light.svg" width="880" alt="Most of the work above is closed. What I can show is public: DB-tf, openvino-ocr, a local LangGraph assistant, a CES dummy sketch, and a Stack Overflow face-embedding thread.">
+</picture>
 
-Most of the work above is closed. What I can show: a [Differentiable Binarization implementation](https://github.com/iamrishab/DB-tf), an [OpenVINO OCR path](https://github.com/iamrishab/openvino-ocr), and a [local LangGraph assistant](https://github.com/iamrishab/private-personal-proxy). The CES cart has a [dummy sketch](https://github.com/iamrishab/artificial-intelligence-conductor), not the show build. I used to answer [face-embedding questions](https://stackoverflow.com/questions/61302918/best-metric-for-face-embedding-comparison-during-inference) on Stack Overflow.
+[DB-tf](https://github.com/iamrishab/DB-tf) · [openvino-ocr](https://github.com/iamrishab/openvino-ocr) · [private-personal-proxy](https://github.com/iamrishab/private-personal-proxy) · [CES dummy sketch](https://github.com/iamrishab/artificial-intelligence-conductor) · [face-embedding thread](https://stackoverflow.com/questions/61302918/best-metric-for-face-embedding-comparison-during-inference)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/reach-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/reach-light.svg">
+  <img src="assets/dist/reach-light.svg" width="880" alt="rishabpal.work@gmail.com, LinkedIn, Immovable Tech">
+</picture>
 
 rishabpal.work@gmail.com · [LinkedIn](https://linkedin.com/in/rishabpal) · [Immovable Tech](https://immovabletech.com)
