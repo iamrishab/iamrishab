@@ -1,0 +1,1 @@
+"""Profile README SVG tooling."""

@@ -1,157 +1,74 @@
-<p align="center">
-  <a href="https://github.com/iamrishab">
-    <img src="https://github.com/iamrishab/iamrishab/blob/master/assets/hello.gif" height="50">
-  </a>
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/hero-light.svg">
+  <img src="assets/dist/hero-light.svg" width="880" alt="My loss function in life is feeling alive.">
+</picture>
 
-<p align="center">
-  <a href="https://github.com/iamrishab">
-    <img src="https://github.com/iamrishab/iamrishab/blob/master/assets/neural.gif" width="480" height="270.222">
-  </a>
-</p>
+My loss function in life is feeling alive.
 
+I run [Immovable Tech](https://immovabletech.com). Before that I spent eight years putting models into products that already had users — search, KYC, roofs measured from the air, assistants that had to answer in two languages. I care about the part after the demo: latency, evals, the bill, whether it still works on a Monday.
 
-<h1 align="center">
-  🚀 About Me
-</h1>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/act-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/act-light.svg">
+  <img src="assets/dist/act-light.svg" width="880" alt="See, choose, act — AI that acts, not just answers.">
+</picture>
 
-<p align="center">
-  🔭 I'm currently working on <b>Multi-Agent AI Systems</b>, <b>LLM Orchestration</b>, and <b>Agentic Frameworks</b>.
-</p>
-<p align="center">
-  🤖 Building with <b>Claude</b>, <b>GPT</b>, <b>Gemini</b>, <b>Llama</b> and other <b>Open Source</b> LLMs for next-gen AI applications.
-</p>
-<p align="center">
-  ⚡ Specializing in <b>LangGraph</b>, <b>CrewAI</b>, <b>AutoGen</b>, and <b>Multimodal AI</b> development.
-</p>
-<p align="center">
-  💬 Ask me about <b>AI Agent Architectures</b>, <b>LLM Fine-tuning</b>, and <b>Enterprise AI Solutions</b>
-</p>
+## Work
 
-<h1 align="center">
-  📫 Get In Touch
-</h1>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/work-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/work-light.svg">
+  <img src="assets/dist/work-light.svg" width="880" alt="+50% CTR on catalog search. Aerial line detection 28% to 59%. CES 2019 live demo.">
+</picture>
 
-<div align="center">
-  <a href="mailto:rishabpal.work@gmail.com" target="_blank">
-    <img src="https://img.shields.io/badge/Email-rishabpal.work@gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
-  </a>
-  <a href="https://linkedin.com/in/rishabpal" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-rishabpal-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-  </a>
-</div>
+1. **Immovable Tech** — Agents that run the loop, not the slide. LangGraph + LangSmith, graph + vector RAG, models tuned on the domain, evals you can read later.
+2. **Catalog search at 5,000 QPS** — Semantic matching and learn-to-rank. Click-through +50%, revenue +10%, Milvus underneath.
+3. **Roofs from the air** — Line detection 28% → 59%. Facets at 86% mIOU. Triton + INT8, 25% faster, 30% less VRAM.
+4. **A national-scale assistant** — English and Hinglish, thousands of chats a day. The KYC face stack next to it cut manual review about 25%.
+5. **OCR that beat the API I was paying for** — +12% on ICDAR 2013 versus Google Vision, at a tenth the infra. BERT on the correction pass.
+6. **CES 2019** — Gesture, face, collision tracking in a live golf-cart demo. The [public repo](https://github.com/iamrishab/artificial-intelligence-conductor) is a dummy sketch, not the show build.
 
-<h1 align="center">
-  🧰 Tech Stack
-</h2>
+<details>
+<summary>How the later agent work is shaped</summary>
 
+Questions become DAGs. Known SQL hits a template; the model only writes when nothing matches. Read-only, retries. Judges and a small red team sit in front of the user. When a form bot has to die, the new tools run beside it until they match.
 
-<h3 align="center"> 🤖 AI & LLM Frameworks </h3>
-<div align="center">
+</details>
 
-[![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://www.langchain.com/)
-[![CrewAI](https://img.shields.io/badge/CrewAI-FF6B35?style=for-the-badge&logo=openai&logoColor=white)](https://www.crewai.com/)
-[![AutoGen](https://img.shields.io/badge/AutoGen-00BCF2?style=for-the-badge&logo=microsoft&logoColor=white)](https://microsoft.github.io/autogen/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
-[![Anthropic](https://img.shields.io/badge/Anthropic-191919?style=for-the-badge&logo=anthropic&logoColor=white)](https://anthropic.com/)
-[![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/)
-[![LangGraph](https://img.shields.io/badge/LangGraph-FF6B6B?style=for-the-badge&logo=graphql&logoColor=white)](https://langchain-ai.github.io/langgraph/)
-[![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.ai/)
+## How I take work
 
-</div>
+I take 0→1 AI products and the messy ones that already exist. Discovery through deploy. If you need a deck, I’m the wrong person. If you need a system that is still correct in six months, [email me](mailto:rishabpal.work@gmail.com).
 
-<h3 align="center"> ⚡ ML & Deep Learning </h3>
-<div align="center">
+## Stack
 
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
-[![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
-[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
-[![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white)](https://opencv.org/)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/stack-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/stack-light.svg">
+  <img src="assets/dist/stack-light.svg" width="880" alt="Agents, models, data, serve, eval.">
+</picture>
 
-</div>
+LangGraph · LangSmith · PyTorch · RAG (Neo4j / Milvus / Pinecone) · FastAPI · Triton · AWS / GCP / Azure
 
-<h3 align="center"> 🔧 Tools & Infrastructure </h3>
-<div align="center">
-  
-[![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
-[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)](https://spark.apache.org/)
-[![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=Apache%20Airflow&logoColor=white)](https://airflow.apache.org/)
-[![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=white)](https://prometheus.io/)
-[![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)](https://grafana.com/)
-[![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)](https://mlflow.org/)
+<details>
+<summary>The rest of the bench</summary>
 
-</div>
+- Agents: LangGraph, LangSmith, LangChain, CrewAI, MCP, OpenAI Agents SDK
+- Models: PyTorch, Transformers, LoRA / PEFT, Llama, Stable Diffusion / FLUX
+- Retrieve: Neo4j, Milvus, Pinecone
+- Serve: FastAPI, Docker, ONNX, TensorRT, NVIDIA Triton, MLflow
+- Cloud: AWS (SageMaker, Lambda, Step Functions), GCP (Cloud Run, Vertex), Azure AI
 
-<h3 align="center"> ☁️ Cloud & Databases </h3>
-<div align="center">
+</details>
 
-[![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
-[![Google Cloud](https://img.shields.io/badge/Google%20Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
-[![Azure](https://img.shields.io/badge/Microsoft%20Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
-[![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)](https://www.elastic.co/)
-[![Neo4j](https://img.shields.io/badge/Neo4j-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)](https://neo4j.com/)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/now-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/now-light.svg">
+  <img src="assets/dist/now-light.svg" width="880" alt="Now: shipping multi-agent systems with evals and a paper trail">
+</picture>
 
-</div>
+## On the record
 
-<h3 align="center"> 💻 Development & Code Quality </h3>
-<div align="center">
+Most of the work above is closed. What I can show: a [Differentiable Binarization implementation](https://github.com/iamrishab/DB-tf), an [OpenVINO OCR path](https://github.com/iamrishab/openvino-ocr), and a [local LangGraph assistant](https://github.com/iamrishab/private-personal-proxy). The CES cart has a [dummy sketch](https://github.com/iamrishab/artificial-intelligence-conductor), not the show build. I used to answer [face-embedding questions](https://stackoverflow.com/questions/61302918/best-metric-for-face-embedding-comparison-during-inference) on Stack Overflow.
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/)
-[![PyCharm](https://img.shields.io/badge/PyCharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green)](https://www.jetbrains.com/pycharm/)
-[![Cursor](https://img.shields.io/badge/Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.sh/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Gradio](https://img.shields.io/badge/Gradio-FFA500?style=for-the-badge&logo=gradio&logoColor=white)](https://gradio.app/)
-</div>
-
-<h1 align="center">
-  🧠 StackOverflow Stats
-</h1>
-
-<p align="center">
-  <a href="https://stackoverflow.com/users/9939542/rishab-p">
-    <img align="center" src="https://github-readme-stackoverflow.vercel.app/?userID=9939542" />
-  </a>
-</p>
-
-<h1 align="center">
-  📊 GitHub Stats
-</h1>
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=iamrishab&theme=dark&hide_border=true" alt="GitHub Streak">
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=iamrishab&layout=compact&theme=dark&hide_border=true&exclude_repo=iamrishab" alt="Top Languages">
-</p>
-
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=iamrishab&theme=react-dark&hide_border=true" alt="Contribution Graph">
-</p>
-
-<h2 align="center">
-  🏅 Latest Certifications
-</h2>
-
-<p align="center">
-  🏆 <b>AWS Machine Learning Specialty</b> - Advanced ML on AWS<br>
-  🏆 <b>Google Cloud Professional ML Engineer</b> - Production ML systems<br>
-  🏆 <b>Microsoft Azure AI Engineer Associate</b> - AI solutions architecture<br>
-  🏆 <b>NVIDIA Deep Learning Institute</b> - GPU-accelerated computing
-</p>
-
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=iamrishab&label=Profile%20views&color=0e75b6&style=flat" alt="Profile Views">
-  <img src="https://img.shields.io/github/followers/iamrishab?label=Followers&style=social" alt="GitHub Followers">
-</p> 
+rishabpal.work@gmail.com · [LinkedIn](https://linkedin.com/in/rishabpal) · [Immovable Tech](https://immovabletech.com)

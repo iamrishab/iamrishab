@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle id="basin" cx="24" cy="28" r="13" fill="{{BASIN}}"/><path id="horizon" d="M6 9 C 12 18 18 24 24 28" stroke="{{FILAMENT}}" fill="none"/><path id="cross" d="M16 28 H32 M24 21 V35" stroke="{{INK}}"/><circle id="tick" cx="24" cy="28" r="1.6" fill="{{FILAMENT}}"/></svg>
