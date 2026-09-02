@@ -14,7 +14,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-studio-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-studio-light.svg">
-  <img src="assets/dist/strip-studio-light.svg" width="880" alt="Studio: immovabletech.com">
+  <img src="assets/dist/strip-studio-light.svg" width="880" alt="this is where things get done">
 </picture>
 </a>
 
@@ -36,7 +36,7 @@
   <img src="assets/dist/systems-light.svg" width="880" alt="Immovable Tech. Catalog search at 5,000 QPS. Roofs from the air. A national-scale assistant. OCR that beat the API I was paying for. CES 2019.">
 </picture>
 
-<a href="https://github.com/iamrishab/artificial-intelligence-conductor">
+<a href="https://immovabletech.com/portfolio/">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-show-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-show-light.svg">
