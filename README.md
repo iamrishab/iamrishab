@@ -10,7 +10,13 @@
   <img src="assets/dist/frame-light.svg" width="880" alt="I run Immovable Tech. Before that I spent eight years putting models into products that already had users — search, KYC, roofs measured from the air, assistants that had to answer in two languages. I care about the part after the demo: latency, evals, the bill, whether it still works on a Monday.">
 </picture>
 
-[Immovable Tech](https://immovabletech.com)
+<a href="https://immovabletech.com">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-studio-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-studio-light.svg">
+  <img src="assets/dist/strip-studio-light.svg" width="880" alt="Studio: I run Immovable Tech.">
+</picture>
+</a>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/act-dark.svg">
@@ -30,14 +36,13 @@
   <img src="assets/dist/systems-light.svg" width="880" alt="Immovable Tech. Catalog search at 5,000 QPS. Roofs from the air. A national-scale assistant. OCR that beat the API I was paying for. CES 2019.">
 </picture>
 
-CES 2019 public repo: [dummy sketch](https://github.com/iamrishab/artificial-intelligence-conductor)
-
-<details>
-<summary>How the later agent work is shaped</summary>
-
-Questions become DAGs. Known SQL hits a template; the model only writes when nothing matches. Read-only, retries. Judges and a small red team sit in front of the user. When a form bot has to die, the new tools run beside it until they match.
-
-</details>
+<a href="https://github.com/iamrishab/artificial-intelligence-conductor">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-show-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-show-light.svg">
+  <img src="assets/dist/strip-show-light.svg" width="880" alt="Show: CES 2019 dummy sketch, not the show build">
+</picture>
+</a>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/take-dark.svg">
@@ -45,7 +50,13 @@ Questions become DAGs. Known SQL hits a template; the model only writes when not
   <img src="assets/dist/take-light.svg" width="880" alt="I take 0→1 AI products and the messy ones that already exist. Discovery through deploy. If you need a deck, I’m the wrong person. If you need a system that is still correct in six months, email me.">
 </picture>
 
-[email me](mailto:rishabpal.work@gmail.com)
+<a href="mailto:rishabpal.work@gmail.com">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-mail-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-mail-light.svg">
+  <img src="assets/dist/strip-mail-light.svg" width="880" alt="Mail: a system that is still correct in six months">
+</picture>
+</a>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/stack-dark.svg">
@@ -56,19 +67,8 @@ Questions become DAGs. Known SQL hits a template; the model only writes when not
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/chips-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/chips-light.svg">
-  <img src="assets/dist/chips-light.svg" width="880" alt="LangGraph, LangSmith, PyTorch, RAG, FastAPI, Triton, AWS, GCP, Azure.">
+  <img src="assets/dist/chips-light.svg" width="880" alt="Agents: LangGraph, LangSmith, LangChain, CrewAI, MCP, Agents SDK. Models: PyTorch, Transformers, LoRA, Llama, FLUX. Retrieve: Neo4j, Milvus, Pinecone, RAG. Serve: FastAPI, Docker, ONNX, TensorRT, Triton, MLflow. Cloud: AWS, SageMaker, Lambda, GCP, Vertex, Azure.">
 </picture>
-
-<details>
-<summary>The rest of the bench</summary>
-
-- Agents: LangGraph, LangSmith, LangChain, CrewAI, MCP, OpenAI Agents SDK
-- Models: PyTorch, Transformers, LoRA / PEFT, Llama, Stable Diffusion / FLUX
-- Retrieve: Neo4j, Milvus, Pinecone
-- Serve: FastAPI, Docker, ONNX, TensorRT, NVIDIA Triton, MLflow
-- Cloud: AWS (SageMaker, Lambda, Step Functions), GCP (Cloud Run, Vertex), Azure AI
-
-</details>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/now-dark.svg">
@@ -82,12 +82,66 @@ Questions become DAGs. Known SQL hits a template; the model only writes when not
   <img src="assets/dist/record-light.svg" width="880" alt="Most of the work above is closed. What I can show is public: DB-tf, openvino-ocr, a local LangGraph assistant, a CES dummy sketch, and a Stack Overflow face-embedding thread.">
 </picture>
 
-[DB-tf](https://github.com/iamrishab/DB-tf) · [openvino-ocr](https://github.com/iamrishab/openvino-ocr) · [private-personal-proxy](https://github.com/iamrishab/private-personal-proxy) · [CES dummy sketch](https://github.com/iamrishab/artificial-intelligence-conductor) · [face-embedding thread](https://stackoverflow.com/questions/61302918/best-metric-for-face-embedding-comparison-during-inference)
-
+<a href="https://github.com/iamrishab/DB-tf">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/reach-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/reach-light.svg">
-  <img src="assets/dist/reach-light.svg" width="880" alt="rishabpal.work@gmail.com, LinkedIn, Immovable Tech">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-db-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-db-light.svg">
+  <img src="assets/dist/strip-db-light.svg" width="880" alt="Open: Differentiable Binarization">
 </picture>
+</a>
 
-rishabpal.work@gmail.com · [LinkedIn](https://linkedin.com/in/rishabpal) · [Immovable Tech](https://immovabletech.com)
+<a href="https://github.com/iamrishab/openvino-ocr">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-ocr-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-ocr-light.svg">
+  <img src="assets/dist/strip-ocr-light.svg" width="880" alt="Open: OpenVINO OCR path">
+</picture>
+</a>
+
+<a href="https://github.com/iamrishab/private-personal-proxy">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-rag-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-rag-light.svg">
+  <img src="assets/dist/strip-rag-light.svg" width="880" alt="Open: local LangGraph assistant">
+</picture>
+</a>
+
+<a href="https://github.com/iamrishab/artificial-intelligence-conductor">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-ces-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-ces-light.svg">
+  <img src="assets/dist/strip-ces-light.svg" width="880" alt="Open: CES dummy sketch">
+</picture>
+</a>
+
+<a href="https://stackoverflow.com/questions/61302918/best-metric-for-face-embedding-comparison-during-inference">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-so-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-so-light.svg">
+  <img src="assets/dist/strip-so-light.svg" width="880" alt="Open: face-embedding thread">
+</picture>
+</a>
+
+<a href="mailto:rishabpal.work@gmail.com">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-email-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-email-light.svg">
+  <img src="assets/dist/strip-email-light.svg" width="880" alt="Mail: rishabpal.work@gmail.com">
+</picture>
+</a>
+
+<a href="https://linkedin.com/in/rishabpal">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-link-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-link-light.svg">
+  <img src="assets/dist/strip-link-light.svg" width="880" alt="Link: linkedin.com/in/rishabpal">
+</picture>
+</a>
+
+<a href="https://immovabletech.com">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-site-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-site-light.svg">
+  <img src="assets/dist/strip-site-light.svg" width="880" alt="Studio: immovabletech.com">
+</picture>
+</a>

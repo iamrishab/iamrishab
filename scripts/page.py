@@ -292,10 +292,7 @@ def heading_3d(palette: Theme, text: str, x: float, y: float, element_id: str) -
 def build_frame(palette: Theme) -> str:
     """Lede as a page module: 3D datum sculpture plus the intro copy."""
     regular = newsreader(italic=False)
-    italic = newsreader(italic=True)
     prefix = "frame"
-    hook_a, _ = outline_text(regular, "My loss function in life is", 26, 200, 78)
-    hook_b, _ = outline_text(italic, "feeling alive.", 28, 200, 112)
     body_copy = (
         "I run Immovable Tech. Before that I spent eight years putting models "
         "into products that already had users — search, KYC, roofs measured "
@@ -303,26 +300,26 @@ def build_frame(palette: Theme) -> str:
         "about the part after the demo: latency, evals, the bill, whether it "
         "still works on a Monday."
     )
-    block, _ = outlined_block(
+    block, last = outlined_block(
         regular,
         body_copy,
-        15,
+        16,
         200,
-        148,
-        palette["MUTED"],
+        88,
+        palette["INK"],
         "lede",
         max_width=640,
-        leading=20,
+        leading=22,
     )
     sculpture = with_float(
         f'<g filter="url(#{prefix}-soft)">'
-        f'<circle cx="108" cy="150" r="62" fill="url(#{prefix}-glow)"/>'
-        f'<circle cx="108" cy="150" r="44" fill="{palette["BASIN"]}"/>'
-        f"{iso_box(108, 118, 22, 16, prefix)}"
-        f'<path d="M78 112 C 90 128 98 140 108 150" fill="none" '
+        f'<circle cx="108" cy="128" r="62" fill="url(#{prefix}-glow)"/>'
+        f'<circle cx="108" cy="128" r="44" fill="{palette["BASIN"]}"/>'
+        f"{iso_box(108, 96, 22, 16, prefix)}"
+        f'<path d="M78 90 C 90 106 98 118 108 128" fill="none" '
         f'stroke="{palette["FILAMENT"]}" stroke-width="2.2" '
         f'stroke-linecap="round"/>'
-        f'<circle cx="108" cy="150" r="4" fill="{palette["GOLD"]}">'
+        f'<circle cx="108" cy="128" r="4" fill="{palette["GOLD"]}">'
         f'<animate attributeName="opacity" values="0.55;1;0.55" '
         f'dur="12s" repeatCount="indefinite"/>'
         f"</circle>"
@@ -330,17 +327,16 @@ def build_frame(palette: Theme) -> str:
         "sculpture",
         "0s",
     )
-    studio, _ = outline_text(plex_mono(), "IMMOVABLE TECH", 12, 200, 268)
+    studio, _ = outline_text(plex_mono(), "IMMOVABLE TECH", 12, 200, last + 28)
+    height = int(last + 52)
     body = (
         f"{defs_3d(palette, prefix)}"
-        f"{rail(palette, 288)}"
+        f"{rail(palette, float(height))}"
         f"{sculpture}"
-        f"{_path(hook_a, palette['INK'], 'hook-a')}"
-        f"{_path(hook_b, palette['FILAMENT'], 'hook-b')}"
         f"{block}"
         f"{_path(studio, palette['GOLD'], 'studio')}"
     )
-    return _svg_doc(880, 288, body)
+    return _svg_doc(880, height, body)
 
 
 SYSTEMS = (
@@ -468,51 +464,81 @@ def build_take(palette: Theme) -> str:
     return _svg_doc(880, 196, body)
 
 
-CHIPS = (
-    "LangGraph",
-    "LangSmith",
-    "PyTorch",
-    "RAG",
-    "FastAPI",
-    "Triton",
-    "AWS",
-    "GCP",
-    "Azure",
+CHIP_ROWS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    (
+        "AGENTS",
+        (
+            "LangGraph",
+            "LangSmith",
+            "LangChain",
+            "CrewAI",
+            "MCP",
+            "Agents SDK",
+        ),
+    ),
+    (
+        "MODELS",
+        ("PyTorch", "Transformers", "LoRA", "Llama", "FLUX"),
+    ),
+    (
+        "RETRIEVE",
+        ("Neo4j", "Milvus", "Pinecone", "RAG"),
+    ),
+    (
+        "SERVE",
+        ("FastAPI", "Docker", "ONNX", "TensorRT", "Triton", "MLflow"),
+    ),
+    (
+        "CLOUD",
+        ("AWS", "SageMaker", "Lambda", "GCP", "Vertex", "Azure"),
+    ),
 )
 
 
 def build_chips(palette: Theme) -> str:
-    """Stack as isometric tiles instead of a middot line."""
+    """Full bench as isometric tiles, grouped the way the work is staffed."""
     prefix = "chip"
     mono = plex_mono()
-    parts = [defs_3d(palette, prefix), rail(palette, 168)]
+    parts = [defs_3d(palette, prefix)]
     parts.append(heading_3d(palette, "STACK", 44, 36, "stack-head"))
     x = 48.0
-    y = 72.0
-    for index, label in enumerate(CHIPS, start=1):
-        _, width = outline_text(mono, label, 14, 0, 0)
-        label_d, _ = outline_text(mono, label, 14, 12, 18)
-        tile_w = max(width + 28, 88)
-        if x + tile_w > 840:
-            x = 48.0
-            y += 48.0
-        parts.append(
-            f'<g id="chip-{index}" transform="translate({x:.1f} {y:.1f})">'
-            f'<path d="M0 10 L10 0 H{tile_w:.1f} L{tile_w - 10:.1f} 10 Z" '
-            f'fill="url(#{prefix}-top)"/>'
-            f'<path d="M0 10 V26 L{tile_w - 10:.1f} 26 V10 Z" '
-            f'fill="url(#{prefix}-left)"/>'
-            f'<path d="M{tile_w - 10:.1f} 10 L{tile_w:.1f} 0 '
-            f'V16 L{tile_w - 10:.1f} 26 Z" '
-            f'fill="url(#{prefix}-right)"/>'
-            f"{_path(label_d, palette['INK'], f'chip-t-{index}')}"
-            f'<animateTransform attributeName="transform" type="translate" '
-            f'values="{x:.1f} {y:.1f}; {x:.1f} {y - 2:.1f}; {x:.1f} {y:.1f}" '
-            f'dur="{10 + index}s" repeatCount="indefinite"/>'
-            f"</g>"
-        )
-        x += tile_w + 14
-    return _svg_doc(880, int(y + 56), "".join(parts))
+    y = 64.0
+    chip_index = 0
+    for row_index, (group, labels) in enumerate(CHIP_ROWS, start=1):
+        group_d, _ = outline_text(mono, group, 12, 48, y + 12)
+        parts.append(_path(group_d, palette["GOLD"], f"chip-group-{row_index}"))
+        y += 22
+        x = 48.0
+        for label in labels:
+            chip_index += 1
+            _, width = outline_text(mono, label, 13, 0, 0)
+            label_d, _ = outline_text(mono, label, 13, 12, 18)
+            tile_w = max(width + 28, 80)
+            if x + tile_w > 840:
+                x = 48.0
+                y += 44.0
+            parts.append(
+                f'<g id="chip-{chip_index}" '
+                f'transform="translate({x:.1f} {y:.1f})">'
+                f'<path d="M0 10 L10 0 H{tile_w:.1f} L{tile_w - 10:.1f} 10 Z" '
+                f'fill="url(#{prefix}-top)"/>'
+                f'<path d="M0 10 V26 L{tile_w - 10:.1f} 26 V10 Z" '
+                f'fill="url(#{prefix}-left)"/>'
+                f'<path d="M{tile_w - 10:.1f} 10 L{tile_w:.1f} 0 '
+                f'V16 L{tile_w - 10:.1f} 26 Z" '
+                f'fill="url(#{prefix}-right)"/>'
+                f"{_path(label_d, palette['INK'], f'chip-t-{chip_index}')}"
+                f'<animateTransform attributeName="transform" '
+                f'type="translate" values="{x:.1f} {y:.1f}; {x:.1f} {y - 2:.1f}; '
+                f'{x:.1f} {y:.1f}" dur="{10 + chip_index}s" '
+                f'repeatCount="indefinite"/>'
+                f"</g>"
+            )
+            x += tile_w + 12
+        y += 50.0
+    height = int(y + 16)
+    parts.insert(1, rail(palette, float(height)))
+    return _svg_doc(880, height, "".join(parts))
 
 
 def build_record(palette: Theme) -> str:

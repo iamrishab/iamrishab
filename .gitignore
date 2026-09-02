@@ -4,3 +4,6 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .DS_Store
+.specstory
+.cursorignore
+.cursorindexingignore

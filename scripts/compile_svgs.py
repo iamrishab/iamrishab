@@ -20,6 +20,7 @@ from scripts.datum import (
     build_now,
     build_sigil,
     build_stack,
+    build_strip,
     build_work,
     write_src_templates,
     write_themed,
@@ -29,10 +30,23 @@ from scripts.page import (
     build_chips,
     build_emoji,
     build_frame,
-    build_reach,
     build_record,
     build_systems,
     build_take,
+)
+
+STRIPS: tuple[tuple[str, str, str], ...] = (
+    ("strip-studio", "STUDIO", "I run Immovable Tech."),
+    ("strip-show", "SHOW", "CES 2019 dummy sketch, not the show build"),
+    ("strip-mail", "MAIL", "a system that is still correct in six months"),
+    ("strip-db", "OPEN", "Differentiable Binarization"),
+    ("strip-ocr", "OPEN", "OpenVINO OCR path"),
+    ("strip-rag", "OPEN", "local LangGraph assistant"),
+    ("strip-ces", "OPEN", "CES dummy sketch"),
+    ("strip-so", "OPEN", "face-embedding thread"),
+    ("strip-email", "MAIL", "rishabpal.work@gmail.com"),
+    ("strip-link", "LINK", "linkedin.com/in/rishabpal"),
+    ("strip-site", "STUDIO", "immovabletech.com"),
 )
 
 
@@ -50,9 +64,19 @@ def compile_all(now_line: str) -> None:
     write_themed("take", build_take)
     write_themed("chips", build_chips)
     write_themed("record", build_record)
-    write_themed("reach", build_reach)
+    for stem, label, line in STRIPS:
+        write_themed(stem, _strip(label, line))
     for kind in GLYPHS:
         write_themed(f"emoji-{kind}", _emoji(kind))
+
+
+def _strip(label: str, line: str) -> Callable[[Theme], str]:
+    """Bind one interstitial strip so compile can write the pair."""
+
+    def build(palette: Theme) -> str:
+        return build_strip(palette, label, line)
+
+    return build
 
 
 def _emoji(kind: str) -> Callable[[Theme], str]:

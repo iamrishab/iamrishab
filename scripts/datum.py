@@ -287,20 +287,29 @@ def build_stack(palette: Theme) -> str:
     return _svg_doc(880, 168, "".join(nodes))
 
 
-def build_now(palette: Theme, line: str) -> str:
-    """Sigil + NOW + one injected focus line. First frame is fully visible."""
+def build_strip(palette: Theme, label: str, line: str) -> str:
+    """Sigil + instrument label + one line. Used between page modules."""
     focus = line.strip()
+    tag = label.strip()
     if not focus:
-        raise ValueError("now line is empty")
+        raise ValueError("strip line is empty")
+    if not tag:
+        raise ValueError("strip label is empty")
     mono = plex_mono()
-    now_d, now_w = outline_text(mono, "NOW", 18, 56, 34)
-    line_d, _ = outline_text(mono, focus, 18, 56 + now_w + 24, 34)
+    tag_d, _ = outline_text(mono, tag, 18, 56, 34)
+    _, gutter = outline_text(mono, "STUDIO", 18, 0, 0)
+    line_d, _ = outline_text(mono, focus, 18, 56 + gutter + 24, 34)
     body = (
         f"{sigil_group(palette, 8, 2, 0.75, pulse=True, element_id='datum')}"
-        f"{_path(now_d, palette['MUTED'], 'now-label')}"
-        f"{_path(line_d, palette['INK'], 'now-line')}"
+        f"{_path(tag_d, palette['MUTED'], 'strip-label')}"
+        f"{_path(line_d, palette['INK'], 'strip-line')}"
     )
     return _svg_doc(880, 52, body)
+
+
+def build_now(palette: Theme, line: str) -> str:
+    """Weekly now strip. Same mark, label locked to NOW."""
+    return build_strip(palette, "NOW", line)
 
 
 def write_themed(stem: str, build: Callable[[Theme], str]) -> None:
