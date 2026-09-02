@@ -14,7 +14,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-studio-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-studio-light.svg">
-  <img src="assets/dist/strip-studio-light.svg" width="880" alt="Studio: I run Immovable Tech.">
+  <img src="assets/dist/strip-studio-light.svg" width="880" alt="Studio: immovabletech.com">
 </picture>
 </a>
 
@@ -40,7 +40,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-show-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-show-light.svg">
-  <img src="assets/dist/strip-show-light.svg" width="880" alt="Show: CES 2019 dummy sketch, not the show build">
+  <img src="assets/dist/strip-show-light.svg" width="880" alt="Show: proof is a Monday, not a slide">
 </picture>
 </a>
 
@@ -76,52 +76,6 @@
   <img src="assets/dist/now-light.svg" width="880" alt="Now: shipping multi-agent systems with evals and a paper trail">
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/record-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/record-light.svg">
-  <img src="assets/dist/record-light.svg" width="880" alt="Most of the work above is closed. What I can show is public: DB-tf, openvino-ocr, a local LangGraph assistant, a CES dummy sketch, and a Stack Overflow face-embedding thread.">
-</picture>
-
-<a href="https://github.com/iamrishab/DB-tf">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-db-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-db-light.svg">
-  <img src="assets/dist/strip-db-light.svg" width="880" alt="Open: Differentiable Binarization">
-</picture>
-</a>
-
-<a href="https://github.com/iamrishab/openvino-ocr">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-ocr-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-ocr-light.svg">
-  <img src="assets/dist/strip-ocr-light.svg" width="880" alt="Open: OpenVINO OCR path">
-</picture>
-</a>
-
-<a href="https://github.com/iamrishab/private-personal-proxy">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-rag-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-rag-light.svg">
-  <img src="assets/dist/strip-rag-light.svg" width="880" alt="Open: local LangGraph assistant">
-</picture>
-</a>
-
-<a href="https://github.com/iamrishab/artificial-intelligence-conductor">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-ces-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-ces-light.svg">
-  <img src="assets/dist/strip-ces-light.svg" width="880" alt="Open: CES dummy sketch">
-</picture>
-</a>
-
-<a href="https://stackoverflow.com/questions/61302918/best-metric-for-face-embedding-comparison-during-inference">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-so-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-so-light.svg">
-  <img src="assets/dist/strip-so-light.svg" width="880" alt="Open: face-embedding thread">
-</picture>
-</a>
-
 <a href="mailto:rishabpal.work@gmail.com">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-email-dark.svg">
@@ -135,13 +89,5 @@
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-link-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-link-light.svg">
   <img src="assets/dist/strip-link-light.svg" width="880" alt="Link: linkedin.com/in/rishabpal">
-</picture>
-</a>
-
-<a href="https://immovabletech.com">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-site-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-site-light.svg">
-  <img src="assets/dist/strip-site-light.svg" width="880" alt="Studio: immovabletech.com">
 </picture>
 </a>

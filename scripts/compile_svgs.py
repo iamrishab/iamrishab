@@ -37,7 +37,7 @@ from scripts.page import (
 
 STRIPS: tuple[tuple[str, str, str], ...] = (
     ("strip-studio", "STUDIO", "I run Immovable Tech."),
-    ("strip-show", "SHOW", "CES 2019 dummy sketch, not the show build"),
+    ("strip-show", "SHOW", "proof is a Monday, not a slide"),
     ("strip-mail", "MAIL", "a system that is still correct in six months"),
     ("strip-db", "OPEN", "Differentiable Binarization"),
     ("strip-ocr", "OPEN", "OpenVINO OCR path"),
