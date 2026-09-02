@@ -12,9 +12,9 @@
 
 <a href="https://immovabletech.com">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-studio-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-studio-light.svg">
-  <img src="assets/dist/strip-studio-light.svg" width="880" alt="this is where things get done">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-site-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-site-light.svg">
+  <img src="assets/dist/strip-site-light.svg" width="880" alt="Studio: immovabletech.com">
 </picture>
 </a>
 
@@ -49,14 +49,6 @@
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/take-light.svg">
   <img src="assets/dist/take-light.svg" width="880" alt="I take 0→1 AI products and the messy ones that already exist. Discovery through deploy. If you need a deck, I’m the wrong person. If you need a system that is still correct in six months, email me.">
 </picture>
-
-<a href="mailto:rishabpal.work@gmail.com">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-mail-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-mail-light.svg">
-  <img src="assets/dist/strip-mail-light.svg" width="880" alt="Mail: a system that is still correct in six months">
-</picture>
-</a>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/stack-dark.svg">
