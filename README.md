@@ -18,14 +18,6 @@
 </picture>
 </a>
 
-<a href="https://immovabletech.com/portfolio/">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-show-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/strip-show-light.svg">
-  <img src="assets/dist/strip-show-light.svg" width="880" alt="Show: proof is a Monday, not a slide">
-</picture>
-</a>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/take-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/take-light.svg">
