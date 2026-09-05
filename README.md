@@ -19,12 +19,6 @@
 </a>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/take-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/take-light.svg">
-  <img src="assets/dist/take-light.svg" width="880" alt="I take 0→1 AI products and the messy ones that already exist. Discovery through deploy. If you need a deck, I’m the wrong person. If you need a system that is still correct in six months, email me.">
-</picture>
-
-<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/stack-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/stack-light.svg">
   <img src="assets/dist/stack-light.svg" width="880" alt="Agents, models, data, serve, eval.">
