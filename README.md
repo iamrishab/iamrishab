@@ -18,24 +18,6 @@
 </picture>
 </a>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/act-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/act-light.svg">
-  <img src="assets/dist/act-light.svg" width="880" alt="See, choose, act — AI that acts, not just answers.">
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/work-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/work-light.svg">
-  <img src="assets/dist/work-light.svg" width="880" alt="+50% CTR on catalog search. Aerial line detection 28% to 59%. CES 2019 live demo.">
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/systems-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/systems-light.svg">
-  <img src="assets/dist/systems-light.svg" width="880" alt="Immovable Tech. Catalog search at 5,000 QPS. Roofs from the air. A national-scale assistant. OCR that beat the API I was paying for. CES 2019.">
-</picture>
-
 <a href="https://immovabletech.com/portfolio/">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/strip-show-dark.svg">
