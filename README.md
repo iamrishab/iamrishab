@@ -1,10 +1,4 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/dist/hero-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/dist/hero-light.svg">
-  <img src="assets/dist/hero-light.svg" width="880" alt="My loss function in life is feeling alive.">
-</picture>
-
-<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/dist/frame-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/dist/frame-light.svg">
   <img src="assets/dist/frame-light.svg" width="880" alt="I run Immovable Tech. Before that I spent eight years putting models into products that already had users — search, KYC, roofs measured from the air, assistants that had to answer in two languages. I care about the part after the demo: latency, evals, the bill, whether it still works on a Monday.">
