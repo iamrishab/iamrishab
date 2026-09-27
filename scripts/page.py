@@ -1,83 +1,20 @@
-"""Webpage modules: isometric glyphs, colored type, and living page sections."""
+"""Profile modules: a forward pass, a trace, receipts, and the link dock."""
 
 from __future__ import annotations
+
+from typing import Final
 
 from fontTools.ttLib.ttFont import TTFont as TTFontType
 
 from scripts.datum import (
     Theme,
-    _path,
     _svg_doc,
+    mono_label,
     newsreader,
-    outline_text,
     plex_mono,
+    text_width,
+    type_run,
 )
-
-
-def defs_3d(palette: Theme, prefix: str) -> str:
-    """Lighting, glow, and a soft shadow shared by every page module."""
-    return (
-        f"<defs>"
-        f'<linearGradient id="{prefix}-top" x1="0" y1="0" x2="1" y2="1">'
-        f'<stop offset="0" stop-color="{palette["LIGHT"]}"/>'
-        f'<stop offset="1" stop-color="{palette["FACE"]}"/>'
-        f"</linearGradient>"
-        f'<linearGradient id="{prefix}-left" x1="0" y1="0" x2="0" y2="1">'
-        f'<stop offset="0" stop-color="{palette["FACE"]}"/>'
-        f'<stop offset="1" stop-color="{palette["SHADE"]}"/>'
-        f"</linearGradient>"
-        f'<linearGradient id="{prefix}-right" x1="1" y1="0" x2="0" y2="1">'
-        f'<stop offset="0" stop-color="{palette["FILAMENT"]}"/>'
-        f'<stop offset="1" stop-color="{palette["DEPTH"]}"/>'
-        f"</linearGradient>"
-        f'<radialGradient id="{prefix}-glow" cx="40%" cy="30%" r="60%">'
-        f'<stop offset="0" stop-color="{palette["GOLD"]}" stop-opacity="0.45"/>'
-        f'<stop offset="1" stop-color="{palette["FILAMENT"]}" stop-opacity="0"/>'
-        f"</radialGradient>"
-        f'<filter id="{prefix}-soft" x="-30%" y="-30%" width="160%" height="160%">'
-        f'<feGaussianBlur in="SourceAlpha" stdDeviation="1.8" result="b"/>'
-        f'<feOffset dy="1.2" result="o"/>'
-        f'<feColorMatrix result="s" '
-        f'values="0 0 0 0 0.45 0 0 0 0 0.22 0 0 0 0 0.08 0 0 0 0.28 0"/>'
-        f'<feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge>'
-        f"</filter>"
-        f"</defs>"
-    )
-
-
-def iso_box(cx: float, cy: float, edge: float, height: float, prefix: str) -> str:
-    """One isometric block. `cx,cy` is the top diamond center."""
-    a = edge
-    h = height
-    top = (
-        f"M{cx:.1f},{cy:.1f} L{cx + a:.1f},{cy + a * 0.5:.1f} "
-        f"L{cx:.1f},{cy + a:.1f} L{cx - a:.1f},{cy + a * 0.5:.1f} Z"
-    )
-    right = (
-        f"M{cx:.1f},{cy + a:.1f} L{cx + a:.1f},{cy + a * 0.5:.1f} "
-        f"L{cx + a:.1f},{cy + a * 0.5 + h:.1f} L{cx:.1f},{cy + a + h:.1f} Z"
-    )
-    left = (
-        f"M{cx:.1f},{cy + a:.1f} L{cx - a:.1f},{cy + a * 0.5:.1f} "
-        f"L{cx - a:.1f},{cy + a * 0.5 + h:.1f} L{cx:.1f},{cy + a + h:.1f} Z"
-    )
-    return (
-        f'<path d="{top}" fill="url(#{prefix}-top)"/>'
-        f'<path d="{right}" fill="url(#{prefix}-right)"/>'
-        f'<path d="{left}" fill="url(#{prefix}-left)"/>'
-    )
-
-
-def rail(palette: Theme, height: float) -> str:
-    """Left page spine so every module reads as one site column."""
-    return (
-        f'<path d="M18 8 V{height - 8:.0f}" stroke="{palette["HAIRLINE"]}" '
-        f'stroke-width="1"/>'
-        f'<circle cx="18" cy="18" r="3.2" fill="{palette["FILAMENT"]}">'
-        f'<animate attributeName="opacity" values="0.55;1;0.55" '
-        f'dur="11s" repeatCount="indefinite"/>'
-        f"</circle>"
-    )
 
 
 def wrap_text(font: TTFontType, text: str, size: float, max_width: float) -> list[str]:
@@ -87,8 +24,7 @@ def wrap_text(font: TTFontType, text: str, size: float, max_width: float) -> lis
     current = ""
     for word in words:
         trial = f"{current} {word}".strip()
-        _, width = outline_text(font, trial, size, 0, 0)
-        if width > max_width and current:
+        if text_width(font, trial, size) > max_width and current:
             lines.append(current)
             current = word
         else:
@@ -111,487 +47,606 @@ def outlined_block(
     leading: float,
 ) -> tuple[str, float]:
     """Draw wrapped outlined copy. Returns markup and the last baseline."""
-    lines = wrap_text(font, text, size, max_width)
     parts: list[str] = []
     baseline = y
-    for index, line in enumerate(lines, start=1):
-        d, _ = outline_text(font, line, size, x, baseline)
-        parts.append(_path(d, fill, f"{element_id}-{index}"))
+    for index, line in enumerate(wrap_text(font, text, size, max_width), start=1):
+        markup, _ = type_run(
+            font, line, size, x, baseline, fill, f"{element_id}-{index}"
+        )
+        parts.append(markup)
         baseline += leading
     return "".join(parts), baseline - leading
 
 
-def with_float(inner: str, element_id: str, delay: str) -> str:
-    """Wrap a mark so it breathes 2 units without losing its position."""
-    return (
-        f'<g id="{element_id}">{inner}'
-        f'<animateTransform attributeName="transform" type="translate" '
-        f'values="0 0; 0 -2; 0 0" dur="12s" begin="{delay}" '
-        f'repeatCount="indefinite"/>'
-        f"</g>"
+def _k(value: float) -> str:
+    """Format a keyTime or value compactly."""
+    return f"{value:.4f}".rstrip("0").rstrip(".") or "0"
+
+
+def appear(start: float, fade: float = 0.18, rise: float = 0.0) -> str:
+    """Hidden until `start`, then fade (and optionally rise) in, once.
+
+    Static renderers ignore SMIL, so the element's resting state is the
+    finished frame and nothing is ever lost.
+    """
+    total = start + fade
+    t0 = _k(start / total)
+    anim = (
+        f'<animate attributeName="opacity" values="0;0;1" keyTimes="0;{t0};1" '
+        f'dur="{_k(total)}s" fill="freeze"/>'
     )
+    if rise:
+        anim += (
+            f'<animateTransform attributeName="transform" type="translate" '
+            f'values="0 {rise};0 {rise};0 0" keyTimes="0;{t0};1" '
+            f'dur="{_k(total)}s" fill="freeze"/>'
+        )
+    return anim
 
 
-def glyph_loop(palette: Theme, prefix: str) -> str:
-    """Three cycling blocks — agents that run the loop."""
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f'<circle cx="36" cy="34" r="22" fill="url(#{prefix}-glow)"/>'
-        f"{iso_box(28, 14, 11, 8, prefix)}"
-        f"{iso_box(44, 22, 11, 8, prefix)}"
-        f"{iso_box(36, 30, 11, 8, prefix)}"
-        f'<path d="M18 28 C 20 16 52 14 54 30" fill="none" '
-        f'stroke="{palette["FILAMENT"]}" stroke-width="1.6" '
-        f'stroke-linecap="round"/>'
-        f'<circle cx="54" cy="30" r="2.1" fill="{palette["GOLD"]}">'
-        f'<animate attributeName="opacity" values="0.5;1;0.5" '
-        f'dur="10s" repeatCount="indefinite"/>'
-        f"</circle>"
-        f"</g>"
-    )
+# --------------------------------------------------------------------------- hero
 
+HERO_TOKENS: Final[tuple[tuple[str, bool, float], ...]] = (
+    # (token, italic, p(token)) — leading spaces belong to the token, as in BPE.
+    ("I", False, 0.94),
+    (" build", False, 0.58),
+    (" the", False, 0.97),
+    (" part", False, 0.41),
+    (" after", False, 0.86),
+    (" the", False, 0.98),
+    (" demo", True, 0.73),
+    (".", False, 0.99),
+)
+QUERY: Final[int] = 6
 
-def glyph_search(palette: Theme, prefix: str) -> str:
-    """Fanned catalog cards plus a copper lens."""
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f"{iso_box(30, 16, 14, 4, prefix)}"
-        f"{iso_box(36, 20, 14, 4, prefix)}"
-        f"{iso_box(42, 24, 14, 4, prefix)}"
-        f'<circle cx="50" cy="40" r="9" fill="none" '
-        f'stroke="{palette["FILAMENT"]}" stroke-width="2.2"/>'
-        f'<path d="M56 46 L62 54" stroke="{palette["GOLD"]}" '
-        f'stroke-width="2.4" stroke-linecap="round"/>'
-        f"</g>"
-    )
+# Attention from " demo" back over tokens 0..5, one row per head. The page
+# cycles heads so the arcs keep re-weighting after the stream lands.
+HEADS: Final[tuple[tuple[str, tuple[float, ...]], ...]] = (
+    ("attn  L14 · H3", (0.12, 0.34, 0.05, 0.66, 0.95, 0.10)),
+    ("attn  L14 · H7", (0.06, 0.08, 0.22, 0.12, 0.40, 0.95)),
+    ("attn  L22 · H1", (0.92, 0.72, 0.06, 0.30, 0.12, 0.05)),
+)
 
+STREAM_START: Final[float] = 0.55
+STREAM_STEP: Final[float] = 0.16
+HEAD_CYCLE: Final[float] = 12.0
 
-def glyph_roof(palette: Theme, prefix: str) -> str:
-    """Isometric gable — roofs from the air."""
-    ridge = "M36,12 L54,22 L36,32 L18,22 Z"
-    face = "M36,32 L54,22 L54,42 L36,52 Z"
-    shade = "M36,32 L18,22 L18,42 L36,52 Z"
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f'<path d="{ridge}" fill="url(#{prefix}-top)"/>'
-        f'<path d="{face}" fill="url(#{prefix}-right)"/>'
-        f'<path d="{shade}" fill="url(#{prefix}-left)"/>'
-        f'<path d="M22 30 L36 22 L50 30" fill="none" '
-        f'stroke="{palette["GOLD"]}" stroke-width="1.3"/>'
-        f"</g>"
-    )
-
-
-def glyph_chat(palette: Theme, prefix: str) -> str:
-    """Two speech volumes — English and Hinglish."""
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f"{iso_box(28, 16, 13, 9, prefix)}"
-        f"{iso_box(44, 24, 12, 8, prefix)}"
-        f'<circle cx="26" cy="24" r="1.6" fill="{palette["GOLD"]}"/>'
-        f'<circle cx="32" cy="27" r="1.6" fill="{palette["FILAMENT"]}"/>'
-        f'<circle cx="38" cy="30" r="1.6" fill="{palette["GOLD"]}"/>'
-        f"</g>"
-    )
-
-
-def glyph_ocr(palette: Theme, prefix: str) -> str:
-    """A page with a scanning filament."""
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f"{iso_box(36, 12, 16, 3, prefix)}"
-        f'<path d="M22 28 H50" stroke="{palette["MUTED"]}" stroke-width="1.2"/>'
-        f'<path d="M24 34 H46" stroke="{palette["MUTED"]}" stroke-width="1.2"/>'
-        f'<path d="M26 40 H42" stroke="{palette["MUTED"]}" stroke-width="1.2"/>'
-        f'<line x1="20" y1="22" x2="52" y2="22" stroke="{palette["FILAMENT"]}" '
-        f'stroke-width="2" stroke-linecap="round">'
-        f'<animate attributeName="y1" values="22;44;22" dur="8s" '
-        f'repeatCount="indefinite"/>'
-        f'<animate attributeName="y2" values="22;44;22" dur="8s" '
-        f'repeatCount="indefinite"/>'
-        f"</line>"
-        f"</g>"
-    )
-
-
-def glyph_cart(palette: Theme, prefix: str) -> str:
-    """Isometric cart for the CES live demo."""
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f"{iso_box(36, 18, 16, 10, prefix)}"
-        f'<circle cx="26" cy="48" r="5" fill="{palette["SHADE"]}"/>'
-        f'<circle cx="46" cy="48" r="5" fill="{palette["SHADE"]}"/>'
-        f'<circle cx="26" cy="48" r="2.2" fill="{palette["GOLD"]}"/>'
-        f'<circle cx="46" cy="48" r="2.2" fill="{palette["GOLD"]}"/>'
-        f'<path d="M20 22 L36 14 L52 22" fill="none" '
-        f'stroke="{palette["FILAMENT"]}" stroke-width="1.5"/>'
-        f"</g>"
-    )
-
-
-def glyph_mail(palette: Theme, prefix: str) -> str:
-    """Isometric envelope."""
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f"{iso_box(36, 18, 18, 6, prefix)}"
-        f'<path d="M20 28 L36 38 L52 28" fill="none" '
-        f'stroke="{palette["GOLD"]}" stroke-width="1.8" '
-        f'stroke-linecap="round"/>'
-        f"</g>"
-    )
-
-
-def glyph_record(palette: Theme, prefix: str) -> str:
-    """Stacked slabs — what can be shown."""
-    return (
-        f'<g id="{prefix}-glyph" filter="url(#{prefix}-soft)">'
-        f"{iso_box(36, 10, 15, 5, prefix)}"
-        f"{iso_box(36, 18, 15, 5, prefix)}"
-        f"{iso_box(36, 26, 15, 5, prefix)}"
-        f'<circle cx="36" cy="20" r="2" fill="{palette["GOLD"]}"/>'
-        f"</g>"
-    )
-
-
-GLYPHS = {
-    "loop": glyph_loop,
-    "search": glyph_search,
-    "roof": glyph_roof,
-    "chat": glyph_chat,
-    "ocr": glyph_ocr,
-    "cart": glyph_cart,
-    "mail": glyph_mail,
-    "record": glyph_record,
-}
-
-
-def build_emoji(palette: Theme, kind: str) -> str:
-    """64×64 custom emoji. One 3D object, already complete on the first frame."""
-    prefix = f"e-{kind}"
-    body = (
-        f"{defs_3d(palette, prefix)}"
-        f'<rect x="4" y="6" width="56" height="52" rx="0" fill="{palette["BASIN"]}"/>'
-        f"{with_float(GLYPHS[kind](palette, prefix), f'{prefix}-float', '0s')}"
-    )
-    return _svg_doc(64, 64, body)
-
-
-def heading_3d(palette: Theme, text: str, x: float, y: float, element_id: str) -> str:
-    """Extruded mono label — a tiny 3D plaque."""
-    mono = plex_mono()
-    front, width = outline_text(mono, text, 18, x, y)
-    depth, _ = outline_text(mono, text, 18, x + 1.4, y + 1.4)
-    return (
-        f"{_path(depth, palette['SHADE'], f'{element_id}-depth')}"
-        f"{_path(front, palette['INK'], element_id)}"
-        f'<path d="M{x:.1f} {y + 8:.1f} H{x + width:.1f}" '
-        f'stroke="{palette["FILAMENT"]}" stroke-width="2" stroke-linecap="round"/>'
-    )
-
-
-def build_frame(palette: Theme) -> str:
-    """Lede as a page module: 3D datum sculpture plus the intro copy."""
-    regular = newsreader(italic=False)
-    prefix = "frame"
-    body_copy = (
-        "I run Immovable Tech. Before that I spent eight years putting models "
-        "into products that already had users — search, KYC, roofs measured "
-        "from the air, assistants that had to answer in two languages. I care "
-        "about the part after the demo: latency, evals, the bill, whether it "
-        "still works on a Monday."
-    )
-    block, last = outlined_block(
-        regular,
-        body_copy,
-        16,
-        200,
-        88,
-        palette["INK"],
-        "lede",
-        max_width=640,
-        leading=22,
-    )
-    sculpture = with_float(
-        f'<g filter="url(#{prefix}-soft)">'
-        f'<circle cx="108" cy="128" r="62" fill="url(#{prefix}-glow)"/>'
-        f'<circle cx="108" cy="128" r="44" fill="{palette["BASIN"]}"/>'
-        f"{iso_box(108, 96, 22, 16, prefix)}"
-        f'<path d="M78 90 C 90 106 98 118 108 128" fill="none" '
-        f'stroke="{palette["FILAMENT"]}" stroke-width="2.2" '
-        f'stroke-linecap="round"/>'
-        f'<circle cx="108" cy="128" r="4" fill="{palette["GOLD"]}">'
-        f'<animate attributeName="opacity" values="0.55;1;0.55" '
-        f'dur="12s" repeatCount="indefinite"/>'
-        f"</circle>"
-        f"</g>",
-        "sculpture",
-        "0s",
-    )
-    studio, _ = outline_text(plex_mono(), "IMMOVABLE TECH", 12, 200, last + 28)
-    height = int(last + 52)
-    body = (
-        f"{defs_3d(palette, prefix)}"
-        f"{rail(palette, float(height))}"
-        f"{sculpture}"
-        f"{block}"
-        f"{_path(studio, palette['GOLD'], 'studio')}"
-    )
-    return _svg_doc(880, height, body)
-
-
-SYSTEMS = (
-    (
-        "loop",
-        "Immovable Tech",
-        (
-            "Agents that run the loop, not the slide. LangGraph + LangSmith, "
-            "graph + vector RAG, models tuned on the domain, evals you can "
-            "read later."
-        ),
-    ),
-    (
-        "search",
-        "Catalog search at 5,000 QPS",
-        (
-            "Semantic matching and learn-to-rank. Click-through +50%, "
-            "revenue +10%, Milvus underneath."
-        ),
-    ),
-    (
-        "roof",
-        "Roofs from the air",
-        (
-            "Line detection 28% → 59%. Facets at 86% mIOU. Triton + INT8, "
-            "25% faster, 30% less VRAM."
-        ),
-    ),
-    (
-        "chat",
-        "A national-scale assistant",
-        (
-            "English and Hinglish, thousands of chats a day. The KYC face "
-            "stack next to it cut manual review about 25%."
-        ),
-    ),
-    (
-        "ocr",
-        "OCR that beat the API I was paying for",
-        (
-            "+12% on ICDAR 2013 versus Google Vision, at a tenth the infra. "
-            "BERT on the correction pass."
-        ),
-    ),
-    (
-        "cart",
-        "CES 2019",
-        (
-            "Gesture, face, collision tracking in a live golf-cart demo. "
-            "The public repo is a dummy sketch, not the show build."
-        ),
-    ),
+LEDE: Final[str] = (
+    "I run Immovable Tech. Before that, eight years putting models into "
+    "products that already had users — search, KYC, roofs measured from the "
+    "air, assistants that answer in two languages."
 )
 
 
-def build_systems(palette: Theme) -> str:
-    """Six selected systems as a feature list, each with a 3D glyph."""
-    prefix = "sys"
+def _head_keytimes() -> tuple[str, list[float]]:
+    """Hold each head for most of its third, crossfade between them."""
+    n = len(HEADS)
+    times: list[float] = []
+    for i in range(n):
+        times.extend([i / n, (i + 0.78) / n])
+    times.append(1.0)
+    return ";".join(_k(t) for t in times), times
+
+
+def _head_values(per_head: list[float]) -> str:
+    """Expand one value per head into the hold/crossfade keyframe list."""
+    values: list[float] = []
+    for value in per_head:
+        values.extend([value, value])
+    values.append(per_head[0])
+    return ";".join(_k(v) for v in values)
+
+
+def build_hero(palette: Theme) -> str:
+    """Name, a prompt, and a streamed answer drawn as tokens with attention."""
     regular = newsreader(italic=False)
-    parts = [
-        defs_3d(palette, prefix),
-        rail(palette, 780),
-        heading_3d(palette, "WORK", 44, 36, "work-head"),
+    italic = newsreader(italic=True)
+    size = 56.0
+    baseline = 206.0
+    chip_top = baseline - 0.76 * size
+    chip_bottom = baseline + 0.27 * size
+    gap = 3.0
+    parts: list[str] = []
+
+    name, _ = mono_label("RISHAB PAL", 13, 40, 34, palette["INK"], "name")
+    role, _ = mono_label(
+        "AI ENGINEER · FOUNDER, IMMOVABLE TECH",
+        13,
+        840,
+        34,
+        palette["MUTED"],
+        "role",
+        anchor_end=True,
+    )
+    chevron, chev_w = mono_label("›", 16, 40, 76, palette["ACCENT"], "chevron")
+    prompt, _ = mono_label(
+        "what do you build?", 15, 40 + chev_w + 8, 76, palette["MUTED"], "prompt"
+    )
+    parts += [
+        name,
+        role,
+        f'<path d="M40 48 H840" stroke="{palette["HAIRLINE"]}" stroke-width="1"/>',
+        chevron,
+        prompt,
     ]
-    y = 64.0
-    for index, (kind, title, blurb) in enumerate(SYSTEMS, start=1):
-        glyph_id = f"{prefix}-{kind}"
-        glyph = GLYPHS[kind](palette, f"{prefix}{index}")
-        title_d, _ = outline_text(regular, title, 20, 120, y + 28)
-        blurb_markup, last = outlined_block(
-            regular,
-            blurb,
-            14,
-            120,
-            y + 50,
-            palette["MUTED"],
-            f"blurb-{index}",
-            max_width=720,
-            leading=18,
+
+    # Lay tokens out first so arcs and the caret can reference their geometry.
+    x = 48.0
+    spans: list[tuple[float, float]] = []
+    chips: list[str] = []
+    for i, (token, is_italic, prob) in enumerate(HERO_TOKENS):
+        font = italic if is_italic else regular
+        glyphs, width = type_run(
+            font,
+            token,
+            size,
+            x,
+            baseline,
+            palette["ACCENT"] if i == QUERY else palette["INK"],
+            f"tok-{i}-t",
         )
-        parts.append(
-            f'<g transform="translate(36 {y:.1f}) scale(0.92)">'
-            f"{defs_3d(palette, f'{prefix}{index}')}"
-            f"{with_float(glyph, glyph_id, f'{0.4 * index:.1f}s')}"
+        left = x - (8.0 if i == 0 else 0.0)
+        right = x + width + (8.0 if i == len(HERO_TOKENS) - 1 else 0.0)
+        spans.append((left, right))
+        hue = palette[f"T{i % 5 + 1}"]
+        outline = ""
+        if i == QUERY:
+            outline = (
+                f'<rect x="{left:.1f}" y="{chip_top:.1f}" '
+                f'width="{right - left:.1f}" height="{chip_bottom - chip_top:.1f}" '
+                f'rx="7" fill="none" stroke="{palette["ACCENT"]}" '
+                f'stroke-width="1.4"/>'
+            )
+        start = STREAM_START + i * STREAM_STEP
+        chips.append(
+            f'<g id="tok-{i}">'
+            f'<rect x="{left:.1f}" y="{chip_top:.1f}" width="{right - left:.1f}" '
+            f'height="{chip_bottom - chip_top:.1f}" rx="7" fill="{hue}" '
+            f'fill-opacity="{palette["TINT"]}"/>'
+            f"{outline}"
+            f"{glyphs}"
+            f'<rect x="{left + 4:.1f}" y="{chip_bottom + 8:.1f}" '
+            f'width="{max((right - left - 8) * prob, 2):.1f}" height="3" rx="1.5" '
+            f'fill="{hue}"/>'
+            f"{appear(start, rise=6)}"
             f"</g>"
         )
-        parts.append(_path(title_d, palette["INK"], f"title-{index}"))
-        parts.append(blurb_markup)
-        shelf = last + 16
-        parts.append(
-            f'<path d="M44 {shelf:.1f} H844" stroke="{palette["HAIRLINE"]}" '
-            f'stroke-width="1"/>'
+        x += width + gap
+    stream_end = STREAM_START + len(HERO_TOKENS) * STREAM_STEP
+
+    # Attention arcs from the query token back over its context.
+    key_times, _ = _head_keytimes()
+    qx = (spans[QUERY][0] + spans[QUERY][1]) / 2
+    arc_base = chip_top - 5
+    arcs: list[str] = []
+    for j in range(QUERY):
+        kx = (spans[j][0] + spans[j][1]) / 2
+        apex = min(60.0, 14.0 + 0.1 * abs(qx - kx))
+        weights = [head[1][j] for head in HEADS]
+        draw_at = stream_end + 0.1 + (QUERY - 1 - j) * 0.08
+        draw_total = draw_at + 0.6
+        arcs.append(
+            f'<path id="arc-{j}" d="M{qx:.1f} {arc_base:.1f} '
+            f'Q{(qx + kx) / 2:.1f} {arc_base - 2 * apex:.1f} {kx:.1f} {arc_base:.1f}" '
+            f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" '
+            f'stroke="{palette["ACCENT"]}" stroke-linecap="round" '
+            f'stroke-width="{0.6 + 2.6 * weights[0]:.2f}" '
+            f'stroke-opacity="{0.15 + 0.85 * weights[0]:.2f}">'
+            f'<animate attributeName="stroke-dashoffset" values="1;1;0" '
+            f'keyTimes="0;{_k(draw_at / draw_total)};1" dur="{_k(draw_total)}s" '
+            f'fill="freeze"/>'
+            f'<animate attributeName="stroke-opacity" '
+            f'values="{_head_values([0.15 + 0.85 * w for w in weights])}" '
+            f'keyTimes="{key_times}" dur="{_k(HEAD_CYCLE)}s" '
+            f'begin="{_k(stream_end + 1.4)}s" repeatCount="indefinite"/>'
+            f'<animate attributeName="stroke-width" '
+            f'values="{_head_values([0.6 + 2.6 * w for w in weights])}" '
+            f'keyTimes="{key_times}" dur="{_k(HEAD_CYCLE)}s" '
+            f'begin="{_k(stream_end + 1.4)}s" repeatCount="indefinite"/>'
+            f"</path>"
+            f'<g><circle cx="{kx:.1f}" cy="{arc_base:.1f}" r="2" '
+            f'fill="{palette["ACCENT"]}" fill-opacity="0.7"/>'
+            f"{appear(draw_total - 0.1)}</g>"
         )
-        y = shelf + 8
-    return _svg_doc(880, int(y + 24), "".join(parts))
-
-
-def build_take(palette: Theme) -> str:
-    """Founder CTA as a 3D plaque, not a grey heading."""
-    prefix = "take"
-    regular = newsreader(italic=False)
-    head = heading_3d(palette, "HOW I TAKE WORK", 120, 40, "take-head")
-    copy = (
-        "I take 0→1 AI products and the messy ones that already exist. "
-        "Discovery through deploy. If you need a deck, I’m the wrong person. "
-        "If you need a system that is still correct in six months, email me."
+    arcs.append(
+        f'<g><circle cx="{qx:.1f}" cy="{arc_base:.1f}" r="3" '
+        f'fill="{palette["ACCENT"]}"/>{appear(stream_end)}</g>'
     )
-    block, _ = outlined_block(
+    parts.append(f'<g id="attention">{"".join(arcs)}</g>')
+
+    # Head label: one outline per head, only the active one visible.
+    for h, (label, _) in enumerate(HEADS):
+        mark, _ = mono_label(
+            label, 11, 840, 76, palette["MUTED"], f"head-{h}", anchor_end=True
+        )
+        visible = [1.0 if i == h else 0.0 for i in range(len(HEADS))]
+        parts.append(
+            f'<g opacity="{1 if h == 0 else 0}">{mark}'
+            f'<animate attributeName="opacity" values="{_head_values(visible)}" '
+            f'keyTimes="{key_times}" dur="{_k(HEAD_CYCLE)}s" '
+            f'begin="{_k(stream_end + 1.4)}s" repeatCount="indefinite" '
+            f'calcMode="discrete"/>'
+            f"</g>"
+        )
+
+    parts += chips
+
+    # Caret rides the stream, then idles as a blinking cursor.
+    stops = [spans[i][1] + 4 for i in range(len(HERO_TOKENS))]
+    caret_values = [stops[0]] + stops
+    caret_times = [0.0] + [
+        (STREAM_START + i * STREAM_STEP) / stream_end for i in range(len(stops))
+    ]
+    parts.append(
+        f'<rect id="caret" x="{stops[-1]:.1f}" y="{chip_top + 8:.1f}" width="3" '
+        f'height="{chip_bottom - chip_top - 16:.1f}" fill="{palette["ACCENT"]}">'
+        f'<animate attributeName="x" calcMode="discrete" '
+        f'values="{";".join(f"{v:.1f}" for v in caret_values)}" '
+        f'keyTimes="{";".join(_k(t) for t in caret_times)}" '
+        f'dur="{_k(stream_end)}s" fill="freeze"/>'
+        f'<animate attributeName="opacity" values="1;1;0;0" '
+        f'keyTimes="0;0.5;0.5;1" dur="1.1s" begin="{_k(stream_end)}s" '
+        f'repeatCount="indefinite"/>'
+        f"</rect>"
+    )
+
+    gloss, _ = mono_label(
+        "latency · evals · the bill · whether it still works on a Monday",
+        14,
+        40,
+        chip_bottom + 46,
+        palette["MUTED"],
+        "gloss",
+    )
+    parts.append(f"<g>{gloss}{appear(stream_end + 0.2, fade=0.5)}</g>")
+
+    rule_y = chip_bottom + 72
+    parts.append(
+        f'<path d="M40 {rule_y:.1f} H840" stroke="{palette["HAIRLINE"]}" '
+        f'stroke-width="1"/>'
+    )
+    lede, last = outlined_block(
         regular,
-        copy,
-        16,
-        120,
-        72,
+        LEDE,
+        19,
+        40,
+        rule_y + 38,
         palette["INK"],
-        "take-copy",
-        max_width=720,
-        leading=22,
+        "lede",
+        max_width=800,
+        leading=28,
     )
-    mail = (
-        f'<g transform="translate(36 48) scale(0.9)">'
-        f"{with_float(glyph_mail(palette, prefix), 'mail-mark', '0s')}"
+    parts.append(lede)
+    return _svg_doc(880, int(last + 22), "".join(parts))
+
+
+# -------------------------------------------------------------------------- trace
+
+# (span, tool, tree prefix, start, end, hue) on a 0..1 timeline.
+SPANS: Final[tuple[tuple[str, str, str, float, float, str], ...]] = (
+    ("request", "FastAPI · Docker", "", 0.00, 1.00, "T4"),
+    ("agent.plan", "LangGraph", "├─ ", 0.02, 0.15, "T1"),
+    ("retrieve.graph", "Neo4j", "├─ ", 0.15, 0.37, "T2"),
+    ("retrieve.vector", "Milvus", "├─ ", 0.15, 0.30, "T2"),
+    ("tool.call", "MCP", "├─ ", 0.37, 0.49, "T1"),
+    ("generate", "Llama · LoRA", "├─ ", 0.49, 0.84, "T3"),
+    ("serve", "Triton · TensorRT INT8", "│  └─ ", 0.50, 0.83, "T3"),
+    ("eval", "LangSmith", "└─ ", 0.84, 0.97, "T5"),
+)
+ALSO: Final[str] = (
+    "PyTorch · Transformers · FLUX · CrewAI · Pinecone · ONNX · MLflow · "
+    "AWS · GCP · Azure"
+)
+TRACE_CYCLE: Final[float] = 10.0
+SWEEP: Final[float] = 0.42  # fraction of the cycle the playhead takes to cross
+
+
+def build_trace(palette: Theme) -> str:
+    """The stack as a live distributed trace that replays every few seconds."""
+    mono = plex_mono()
+    left, right = 410.0, 840.0
+    span_w = right - left
+    parts: list[str] = []
+
+    head, head_w = mono_label("TRACE", 13, 40, 34, palette["ACCENT"], "trace-head")
+    sub, _ = mono_label(
+        "one request through the stack I ship",
+        13,
+        40 + head_w + 14,
+        34,
+        palette["MUTED"],
+        "trace-sub",
+    )
+    parts += [head, sub]
+
+    # Status flips from running to passed when the playhead lands.
+    run_label, run_w = mono_label(
+        "running", 12, 840, 34, palette["MUTED"], "status-run", anchor_end=True
+    )
+    pass_label, _ = mono_label(
+        "✓ evals passed", 12, 840, 34, palette["T3"], "status-pass", anchor_end=True
+    )
+    flip = _k(SWEEP)
+    parts.append(
+        f'<g opacity="0">{run_label}'
+        f'<circle cx="{840 - run_w - 10:.1f}" cy="30" r="3" fill="{palette["MUTED"]}"/>'
+        f'<animate attributeName="opacity" values="1;0" keyTimes="0;{flip}" '
+        f'calcMode="discrete" dur="{_k(TRACE_CYCLE)}s" repeatCount="indefinite"/>'
+        f"</g>"
+        f"<g>{pass_label}"
+        f'<animate attributeName="opacity" values="0;1" keyTimes="0;{flip}" '
+        f'calcMode="discrete" dur="{_k(TRACE_CYCLE)}s" repeatCount="indefinite"/>'
         f"</g>"
     )
-    body = f"{defs_3d(palette, prefix)}{rail(palette, 188)}{mail}{head}{block}"
-    return _svg_doc(880, 196, body)
+
+    axis_y = 60.0
+    row0 = 92.0
+    step = 28.0
+    bottom = row0 + step * (len(SPANS) - 1) + 12
+    grid = [f"M{left} {axis_y} H{right}"]
+    for q in (0.0, 0.25, 0.5, 0.75, 1.0):
+        gx = left + span_w * q
+        grid.append(f"M{gx:.1f} {axis_y - 4} V{axis_y + 4}")
+    parts.append(
+        f'<path d="{" ".join(grid)}" stroke="{palette["HAIRLINE"]}" stroke-width="1"/>'
+    )
+    for q in (0.25, 0.5, 0.75):
+        gx = left + span_w * q
+        parts.append(
+            f'<path d="M{gx:.1f} {axis_y + 8} V{bottom:.1f}" '
+            f'stroke="{palette["HAIRLINE"]}" stroke-width="1" '
+            f'stroke-dasharray="2 4"/>'
+        )
+
+    for i, (span, tool, prefix, start, end, hue) in enumerate(SPANS):
+        y = row0 + step * i
+        tree_w = text_width(mono, prefix, 13)
+        if prefix:
+            tree, _ = mono_label(prefix, 13, 40, y, palette["HAIRLINE"], f"tree-{i}")
+            parts.append(tree)
+        label, _ = mono_label(span, 13, 40 + tree_w, y, palette["INK"], f"span-{i}")
+        tool_d, _ = mono_label(tool, 12, 236, y, palette["MUTED"], f"tool-{i}")
+        bx = left + span_w * start
+        bw = span_w * (end - start)
+        t_start = max(start * SWEEP, 0.0005)
+        t_end = end * SWEEP
+        parts += [
+            label,
+            tool_d,
+            f'<rect x="{bx:.1f}" y="{y - 10:.1f}" width="{bw:.1f}" height="12" '
+            f'rx="3" fill="{palette[hue]}" fill-opacity="0.9">'
+            f'<animate attributeName="width" '
+            f'values="0;0;{bw:.1f};{bw:.1f}" '
+            f'keyTimes="0;{_k(t_start)};{_k(t_end)};1" '
+            f'dur="{_k(TRACE_CYCLE)}s" repeatCount="indefinite"/>'
+            f"</rect>",
+        ]
+
+    parts.append(
+        f'<g opacity="0">'
+        f'<path d="M{left} {axis_y - 6} l-4 -6 h8 z" fill="{palette["ACCENT"]}"/>'
+        f'<path d="M{left} {axis_y - 6} V{bottom:.1f}" '
+        f'stroke="{palette["ACCENT"]}" stroke-width="1.5"/>'
+        f'<animateTransform attributeName="transform" type="translate" '
+        f'values="0 0;{span_w:.1f} 0;{span_w:.1f} 0" keyTimes="0;{flip};1" '
+        f'dur="{_k(TRACE_CYCLE)}s" repeatCount="indefinite"/>'
+        f'<animate attributeName="opacity" values="1;1;0;0" '
+        f'keyTimes="0;{flip};{_k(SWEEP + 0.06)};1" '
+        f'dur="{_k(TRACE_CYCLE)}s" repeatCount="indefinite"/>'
+        f"</g>"
+    )
+
+    foot_y = bottom + 42
+    parts.append(
+        f'<path d="M40 {bottom + 18:.1f} H840" stroke="{palette["HAIRLINE"]}" '
+        f'stroke-width="1"/>'
+    )
+    also, also_w = mono_label("ALSO", 11, 40, foot_y, palette["ACCENT"], "also")
+    bench, _ = mono_label(
+        ALSO, 12, 40 + also_w + 14, foot_y, palette["MUTED"], "also-list"
+    )
+    parts += [also, bench]
+    return _svg_doc(880, int(foot_y + 16), "".join(parts))
 
 
-CHIP_ROWS: tuple[tuple[str, tuple[str, ...]], ...] = (
+# ----------------------------------------------------------------------- receipts
+
+# (system, context, scale, before, after, headline, unit, footnote, hue)
+# scale: "rel" draws before as 1.0 of half the track, "abs" as a percentage of
+# the full track, "" draws no bar because there is no honest baseline to draw.
+RECEIPTS: Final[tuple[tuple[str, str, str, float, float, str, str, str, str], ...]] = (
     (
-        "AGENTS",
-        (
-            "LangGraph",
-            "LangSmith",
-            "LangChain",
-            "CrewAI",
-            "MCP",
-            "Agents SDK",
-        ),
+        "catalog search",
+        "semantic match + learn-to-rank · 5k QPS",
+        "rel",
+        1.0,
+        1.5,
+        "+50%",
+        "click-through",
+        "+10% revenue",
+        "T1",
     ),
     (
-        "MODELS",
-        ("PyTorch", "Transformers", "LoRA", "Llama", "FLUX"),
+        "roofs from the air",
+        "line detection on aerial imagery",
+        "abs",
+        0.28,
+        0.59,
+        "28% → 59%",
+        "",
+        "facets at 86% mIoU",
+        "T2",
     ),
     (
-        "RETRIEVE",
-        ("Neo4j", "Milvus", "Pinecone", "RAG"),
+        "GPU serving",
+        "Triton + TensorRT INT8",
+        "rel",
+        1.0,
+        0.70,
+        "−30%",
+        "VRAM",
+        "25% faster",
+        "T3",
     ),
     (
-        "SERVE",
-        ("FastAPI", "Docker", "ONNX", "TensorRT", "Triton", "MLflow"),
+        "KYC face stack",
+        "face verification for onboarding",
+        "rel",
+        1.0,
+        0.75,
+        "~25%",
+        "less manual review",
+        "",
+        "T4",
     ),
     (
-        "CLOUD",
-        ("AWS", "SageMaker", "Lambda", "GCP", "Vertex", "Azure"),
+        "OCR",
+        "ICDAR 2013 · BERT correction pass",
+        "",
+        0.0,
+        0.0,
+        "+12%",
+        "vs Google Vision",
+        "at a tenth of the infra",
+        "T5",
+    ),
+    (
+        "assistant",
+        "English + Hinglish · national scale",
+        "",
+        0.0,
+        0.0,
+        "1000s",
+        "chats a day",
+        "",
+        "T1",
     ),
 )
 
 
-def build_chips(palette: Theme) -> str:
-    """Full bench as isometric tiles, grouped the way the work is staffed."""
-    prefix = "chip"
-    mono = plex_mono()
-    parts = [defs_3d(palette, prefix)]
-    parts.append(heading_3d(palette, "STACK", 44, 36, "stack-head"))
-    x = 48.0
-    y = 64.0
-    chip_index = 0
-    for row_index, (group, labels) in enumerate(CHIP_ROWS, start=1):
-        group_d, _ = outline_text(mono, group, 12, 48, y + 12)
-        parts.append(_path(group_d, palette["GOLD"], f"chip-group-{row_index}"))
-        y += 22
-        x = 48.0
-        for label in labels:
-            chip_index += 1
-            _, width = outline_text(mono, label, 13, 0, 0)
-            label_d, _ = outline_text(mono, label, 13, 12, 18)
-            tile_w = max(width + 28, 80)
-            if x + tile_w > 840:
-                x = 48.0
-                y += 44.0
-            parts.append(
-                f'<g id="chip-{chip_index}" '
-                f'transform="translate({x:.1f} {y:.1f})">'
-                f'<path d="M0 10 L10 0 H{tile_w:.1f} L{tile_w - 10:.1f} 10 Z" '
-                f'fill="url(#{prefix}-top)"/>'
-                f'<path d="M0 10 V26 L{tile_w - 10:.1f} 26 V10 Z" '
-                f'fill="url(#{prefix}-left)"/>'
-                f'<path d="M{tile_w - 10:.1f} 10 L{tile_w:.1f} 0 '
-                f'V16 L{tile_w - 10:.1f} 26 Z" '
-                f'fill="url(#{prefix}-right)"/>'
-                f"{_path(label_d, palette['INK'], f'chip-t-{chip_index}')}"
-                f'<animateTransform attributeName="transform" '
-                f'type="translate" values="{x:.1f} {y:.1f}; {x:.1f} {y - 2:.1f}; '
-                f'{x:.1f} {y:.1f}" dur="{10 + chip_index}s" '
-                f'repeatCount="indefinite"/>'
-                f"</g>"
-            )
-            x += tile_w + 12
-        y += 50.0
-    height = int(y + 16)
-    parts.insert(1, rail(palette, float(height)))
-    return _svg_doc(880, height, "".join(parts))
+def build_receipts(palette: Theme) -> str:
+    """Shipped numbers as before → after bars. Only numbers that were measured."""
+    track_x, track_w = 330.0, 260.0
+    delta_x = 614.0
+    parts: list[str] = []
 
-
-def build_record(palette: Theme) -> str:
-    """On the record — closed work, then the public artifacts as type."""
-    prefix = "rec"
-    regular = newsreader(italic=False)
-    head = heading_3d(palette, "ON THE RECORD", 120, 40, "rec-head")
-    copy = (
-        "Most of the work above is closed. What I can show: a Differentiable "
-        "Binarization implementation, an OpenVINO OCR path, and a local "
-        "LangGraph assistant. The CES cart has a dummy sketch, not the show "
-        "build. I used to answer face-embedding questions on Stack Overflow."
-    )
-    block, _ = outlined_block(
-        regular,
-        copy,
-        15,
-        120,
-        72,
+    head, head_w = mono_label("RECEIPTS", 13, 40, 34, palette["ACCENT"], "rc-head")
+    sub, _ = mono_label(
+        "from systems that shipped",
+        13,
+        40 + head_w + 14,
+        34,
         palette["MUTED"],
-        "rec-copy",
-        max_width=720,
-        leading=20,
+        "rc-sub",
     )
-    mark = (
-        f'<g transform="translate(36 48) scale(0.9)">'
-        f"{with_float(glyph_record(palette, prefix), 'rec-mark', '0s')}"
-        f"</g>"
+    after_l, after_w = mono_label(
+        "after", 11, 840, 34, palette["MUTED"], "lg-after", anchor_end=True
     )
-    body = f"{defs_3d(palette, prefix)}{rail(palette, 196)}{mark}{head}{block}"
-    return _svg_doc(880, 204, body)
+    before_x = 840 - after_w - 14 - 18 - 12
+    before_l, before_w = mono_label(
+        "before", 11, before_x, 34, palette["MUTED"], "lg-before", anchor_end=True
+    )
+    parts += [
+        head,
+        sub,
+        after_l,
+        before_l,
+        f'<rect x="{840 - after_w - 26:.1f}" y="25" width="18" height="9" rx="2" '
+        f'fill="{palette["INK"]}" fill-opacity="0.75"/>',
+        f'<rect x="{before_x - before_w - 26:.1f}" y="25.5" width="18" height="8" '
+        f'rx="2" fill="none" stroke="{palette["MUTED"]}" stroke-dasharray="3 2"/>',
+        f'<path d="M40 48 H840" stroke="{palette["HAIRLINE"]}" stroke-width="1"/>',
+    ]
+
+    y = 86.0
+    step = 56.0
+    for i, (name, context, scale, before, after, big, unit, note, hue) in enumerate(
+        RECEIPTS
+    ):
+        color = palette[hue]
+        label, _ = mono_label(name, 15, 40, y, palette["INK"], f"rc-name-{i}")
+        ctx, _ = mono_label(context, 11, 40, y + 18, palette["MUTED"], f"rc-ctx-{i}")
+        parts += [label, ctx]
+        if scale:
+            unit_w = track_w / 2 if scale == "rel" else track_w
+            b_w = unit_w * before
+            a_w = unit_w * after
+            begin = 0.4 + i * 0.14
+            total = begin + 1.1
+            parts += [
+                f'<rect x="{track_x}" y="{y - 12:.1f}" width="{track_w}" '
+                f'height="14" rx="3" fill="{palette["HAIRLINE"]}" '
+                f'fill-opacity="0.35"/>',
+                f'<rect x="{track_x}" y="{y - 12:.1f}" width="{a_w:.1f}" height="14" '
+                f'rx="3" fill="{color}">'
+                f'<animate attributeName="width" '
+                f'values="{b_w:.1f};{b_w:.1f};{a_w:.1f}" '
+                f'keyTimes="0;{_k(begin / total)};1" '
+                f'keySplines="0 0 1 1;0.2 0.8 0.2 1" '
+                f'calcMode="spline" dur="{_k(total)}s" fill="freeze"/>'
+                f"</rect>",
+                f'<rect x="{track_x}" y="{y - 12:.1f}" width="{b_w:.1f}" height="14" '
+                f'rx="3" fill="none" stroke="{palette["INK"]}" stroke-opacity="0.55" '
+                f'stroke-width="1.2" stroke-dasharray="3 2"/>',
+            ]
+        big_d, big_w = mono_label(big, 20, delta_x, y + 1, color, f"rc-big-{i}")
+        parts.append(big_d)
+        if unit:
+            unit_d, _ = mono_label(
+                unit, 12, delta_x + big_w + 8, y, palette["INK"], f"rc-unit-{i}"
+            )
+            parts.append(unit_d)
+        if note:
+            note_d, _ = mono_label(
+                note, 11, delta_x, y + 18, palette["MUTED"], f"rc-note-{i}"
+            )
+            parts.append(note_d)
+        if i < len(RECEIPTS) - 1:
+            parts.append(
+                f'<path d="M40 {y + 32:.1f} H840" stroke="{palette["HAIRLINE"]}" '
+                f'stroke-width="1" stroke-opacity="0.6"/>'
+            )
+        y += step
+    return _svg_doc(880, int(y - step + 40), "".join(parts))
 
 
-def build_reach(palette: Theme) -> str:
-    """Contact dock. The real links stay in markdown under this strip."""
-    prefix = "reach"
-    mono = plex_mono()
-    mail, _ = outline_text(mono, "rishabpal.work@gmail.com", 16, 120, 78)
-    li, _ = outline_text(mono, "LinkedIn", 16, 120, 108)
-    studio, _ = outline_text(mono, "Immovable Tech", 16, 120, 138)
-    head = heading_3d(palette, "REACH", 120, 40, "reach-head")
-    mark = (
-        f'<g transform="translate(36 52) scale(0.9)">'
-        f"{with_float(glyph_mail(palette, prefix), 'reach-mark', '0s')}"
-        f"</g>"
+# --------------------------------------------------------------------------- dock
+
+DOCK: Final[tuple[tuple[str, str, str], ...]] = (
+    # (stem, label, value)
+    ("dock-site", "STUDIO", "immovabletech.com"),
+    ("dock-mail", "MAIL", "rishabpal.work@gmail.com"),
+    ("dock-link", "LINKEDIN", "in/rishabpal"),
+)
+
+
+def build_dock(palette: Theme, index: int, label: str, value: str) -> str:
+    """One third of the 880 grid; markdown owns the href.
+
+    The README sets each key to 33.33% with no whitespace between them, so the
+    three images tile one 880-wide row. Each key's frame is offset inside its
+    tile so the row lines up with the 40..840 column of every other module.
+    """
+    tile = 880 / len(DOCK)
+    gap = 20.0
+    key_w = (800 - gap * (len(DOCK) - 1)) / len(DOCK)
+    x0 = 40 + index * (key_w + gap) - index * tile
+    height = 64
+    tag, _ = mono_label(label, 10, x0 + 18, 26, palette["MUTED"], "dock-label")
+    text, _ = mono_label(value, 14, x0 + 18, 47, palette["INK"], "dock-value")
+    arrow, _ = mono_label(
+        "↗",
+        16,
+        x0 + key_w - 16,
+        32,
+        palette["ACCENT"],
+        "dock-arrow",
+        anchor_end=True,
     )
     body = (
-        f"{defs_3d(palette, prefix)}"
-        f"{rail(palette, 168)}"
-        f"{mark}"
-        f"{head}"
-        f"{_path(mail, palette['INK'], 'reach-mail')}"
-        f"{_path(li, palette['FILAMENT'], 'reach-li')}"
-        f"{_path(studio, palette['GOLD'], 'reach-studio')}"
+        f'<rect x="{x0 + 0.5:.2f}" y="0.5" width="{key_w - 1:.2f}" '
+        f'height="{height - 1}" rx="10" stroke="{palette["HAIRLINE"]}" '
+        f'stroke-width="1"/>'
+        f"{tag}{text}{arrow}"
     )
-    return _svg_doc(880, 168, body)
+    return _svg_doc(round(tile, 3), height, body)

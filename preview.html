@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><style>
-body{margin:0;display:flex}
-.l{flex:1;background:#fff;padding:20px}
-.d{flex:1;background:#0d1117;padding:20px}
-img{width:100%;max-width:880px;display:block;margin-bottom:12px}
+<html><head><meta charset="utf-8"><title>Profile preview</title><style>
+body{margin:0;display:flex;min-height:100vh;font:14px system-ui}
+.col{flex:1;padding:24px;box-sizing:border-box}
+.l{background:#fff}.d{background:#0d1117}
+.col>img{width:100%;max-width:880px;display:block;margin-bottom:24px}
+.dock{max-width:880px;display:flex}.dock img{width:33.33%}
 </style></head>
 <body>
-<div class="l">
-<img src="assets/dist/hero-light.svg" alt="hero">
-<img src="assets/dist/frame-light.svg" alt="frame">
-</div>
-<div class="d">
-<img src="assets/dist/hero-dark.svg" alt="hero">
-<img src="assets/dist/frame-dark.svg" alt="frame">
-</div>
+<div class="col l"></div>
+<div class="col d"></div>
+<script>
+const mods=["hero","trace","receipts","now"], dock=["site","mail","link"];
+for (const [cls,t] of [["l","light"],["d","dark"]]) {
+  const col=document.querySelector("."+cls);
+  col.innerHTML = mods.map(m=>`<img src="assets/dist/${m}-${t}.svg" alt="${m}">`).join("")
+    + `<div class="dock">${dock.map(k=>`<img src="assets/dist/dock-${k}-${t}.svg" alt="${k}">`).join("")}</div>`;
+}
+</script>
 </body></html>
